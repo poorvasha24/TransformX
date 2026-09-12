@@ -17,11 +17,12 @@
     background-color: #05070a;
     color: #e0e0e0;
     overflow-x: hidden;
-    cursor: none !important;
   }
 
-  * {
-    cursor: none !important;
+  @media (hover: hover) and (pointer: fine) {
+    body, * {
+      cursor: none !important;
+    }
   }
 
   h1, h2, h3, .font-orbitron {
@@ -212,15 +213,39 @@
 
 /* Continuous Marquee Animation */
 @keyframes themeMarquee {
-  0% { transform: translateX(-43.75%); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-25%, 0, 0); }
 }
 
 .animate-marquee {
-  animation: themeMarquee 40s linear infinite;
+  animation: themeMarquee 35s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
-.hover\:pause-animation:hover {
+.touch-pan-y {
+  touch-action: pan-y;
+}
+
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation-duration: 25s;
+  }
+}
+
+/* Marquee Pause Behaviors: Native CSS hover, active, focus, and class toggle */
+.animate-marquee:hover,
+.animate-marquee:active,
+.animate-marquee:focus-within,
+.animate-marquee.is-paused,
+.pause-marquee:hover .animate-marquee,
+.pause-marquee:active .animate-marquee,
+.pause-marquee:focus-within .animate-marquee,
+.pause-marquee.is-paused .animate-marquee,
+.animate-marquee:has(.carousel-slot:hover),
+.animate-marquee:has(.carousel-slot:active),
+.animate-marquee:has(.carousel-slot:focus-within) {
   animation-play-state: paused !important;
 }
 

@@ -25,7 +25,7 @@ export interface RoadmapMilestone {
   date: string;
   time: string;
   status?: string;
-  type: 'REGISTRATION' | 'QUIZ' | 'QUALIFICATION' | 'PROPOSAL' | 'ELITE' | 'ARENA';
+  type: 'REGISTRATION' | 'QUIZ' | 'QUALIFICATION' | 'PROPOSAL' | 'ELITE' | 'ARENA' | 'SUBMISSION';
   accent: 'blue' | 'cyan' | 'red' | 'amber';
   isFinal?: boolean;
 }

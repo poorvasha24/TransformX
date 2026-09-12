@@ -2,25 +2,41 @@ import React, { useEffect, useState, useRef } from 'react';
 import { playClick } from '../utils/audio';
 
 export const CustomCursor: React.FC = () => {
+  const [enabled, setEnabled] = useState(false);
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const trailRef = useRef<{ x: number; y: number }[]>([]);
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Removed strict touch device check to allow touch-enabled laptops to see the cursor when using a mouse
+    // Only enable cursor on devices that actually have a fine pointer (mouse/trackpad)
+    const isTouchOnly = window.matchMedia('(pointer: coarse)').matches && !window.matchMedia('(pointer: fine)').matches;
+    if (isTouchOnly || window.innerWidth < 768) {
+      setEnabled(false);
+      return;
+    }
+    setEnabled(true);
+
+    let rafId: number | null = null;
+    let latestX = -100;
+    let latestY = -100;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const newX = e.clientX;
-      const newY = e.clientY;
-      setPos({ x: newX, y: newY });
+      latestX = e.clientX;
+      latestY = e.clientY;
 
-      // Update trail directly
-      trailRef.current = [
-        { x: newX, y: newY },
-        ...(trailRef.current.slice(0, 5))
-      ];
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          setPos({ x: latestX, y: latestY });
+          trailRef.current = [
+            { x: latestX, y: latestY },
+            ...(trailRef.current.slice(0, 5))
+          ];
+          rafId = null;
+        });
+      }
 
       // Check if hovering over clickable element
       const target = e.target as HTMLElement | null;
@@ -39,16 +55,19 @@ export const CustomCursor: React.FC = () => {
       setIsClicked(false);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
     };
   }, []);
+
+  if (!enabled) return null;
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">

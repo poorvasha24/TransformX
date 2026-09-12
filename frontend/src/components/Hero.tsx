@@ -43,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({
             x: { duration: 2, ease: "easeOut" },
             y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
           }}
-          className="absolute top-0 bottom-0 left-[-20%] sm:left-[-10%] lg:left-[-15%] w-[120%] sm:w-[70%] lg:w-[45%] opacity-30 sm:opacity-50 lg:opacity-70 mix-blend-screen"
+          className="absolute top-0 bottom-0 left-[0%] sm:left-[-10%] lg:left-[-15%] w-[45%] sm:w-[70%] lg:w-[45%] opacity-30 sm:opacity-50 lg:opacity-70 mix-blend-screen"
           style={{
             WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 90%), linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
             WebkitMaskComposite: 'source-in',
@@ -67,7 +67,7 @@ export const Hero: React.FC<HeroProps> = ({
             x: { duration: 2, ease: "easeOut", delay: 0.2 },
             y: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }
           }}
-          className="absolute top-0 bottom-0 right-[-20%] sm:right-[-10%] lg:right-[-10%] w-[120%] sm:w-[70%] lg:w-[45%] opacity-20 sm:opacity-40 lg:opacity-60 mix-blend-screen"
+          className="absolute top-0 bottom-0 right-[0%] sm:right-[-10%] lg:right-[-10%] w-[45%] sm:w-[70%] lg:w-[45%] opacity-20 sm:opacity-40 lg:opacity-60 mix-blend-screen"
           style={{
             WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 90%), linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
             WebkitMaskComposite: 'source-in',
@@ -185,7 +185,7 @@ export const Hero: React.FC<HeroProps> = ({
           {/* Subtle Ambient Glow */}
           <div className="absolute inset-0 blur-3xl bg-[#00A3FF]/10 pointer-events-none" />
 
-          <h1 className="font-orbitron font-black text-6xl sm:text-8xl md:text-9xl lg:text-[110px] leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-[#4a4a4f] drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
+          <h1 className="font-orbitron font-black text-3xl min-[400px]:text-4xl sm:text-7xl md:text-9xl lg:text-[110px] leading-none tracking-tight sm:tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-[#4a4a4f] drop-shadow-[0_10px_30px_rgba(0,0,0,0.9)]">
             TRANSFORMX
           </h1>
         </motion.div>
@@ -195,7 +195,7 @@ export const Hero: React.FC<HeroProps> = ({
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mt-2 text-sm sm:text-lg md:text-xl font-bold tracking-[0.35em] sm:tracking-[0.4em] text-[#cc0000] uppercase font-mono"
+          className="mt-2 text-xs min-[400px]:text-sm sm:text-lg md:text-xl font-bold tracking-[0.25em] sm:tracking-[0.4em] text-[#cc0000] uppercase font-mono text-center"
         >
           TRANSFORM. BUILD. DEPLOY THE FUTURE.
         </motion.div>

@@ -36,8 +36,8 @@ export const ThemesSection: React.FC = () => {
     }
   };
 
-  // Generate 16 sets of themes to create a massive buffer for infinite dragging
-  const duplicatedThemes = Array(16).fill(SIH_THEMES).flat();
+  // Generate 4 sets of themes for infinite seamless marquee looping
+  const duplicatedThemes = Array(4).fill(SIH_THEMES).flat();
 
   const selectedTheme = SIH_THEMES.find((t) => t.id === selectedThemeId) || null;
 
@@ -93,9 +93,14 @@ export const ThemesSection: React.FC = () => {
 
         {/* 7 INTERACTIVE MECHANICAL MODULES IN DYNAMIC HORIZONTAL CAROUSEL */}
         <div 
-          className="relative overflow-hidden" 
+          className="relative overflow-hidden pause-marquee" 
           onMouseEnter={() => setIsHovered(true)} 
           onMouseLeave={() => setIsHovered(false)}
+          onPointerEnter={() => setIsHovered(true)}
+          onPointerLeave={() => setIsHovered(false)}
+          onTouchStart={() => setIsHovered(true)}
+          onTouchEnd={() => setIsHovered(false)}
+          onTouchCancel={() => setIsHovered(false)}
           onWheel={handleWheel}
         >
           
@@ -103,13 +108,16 @@ export const ThemesSection: React.FC = () => {
           <motion.div
             drag="x"
             style={{ x: dragX }}
-            dragConstraints={{ left: -15000, right: 15000 }}
+            dragConstraints={{ left: -3000, right: 3000 }}
             dragElastic={0.15}
-            className="cursor-grab active:cursor-grabbing"
+            onDragStart={() => setIsHovered(true)}
+            onDragEnd={() => setIsHovered(false)}
+            className="cursor-grab active:cursor-grabbing touch-pan-y"
           >
             {/* Continuous Moving Carousel */}
             <motion.div 
-              className="flex gap-6 min-w-max px-4 py-8 pointer-events-auto animate-marquee hover:pause-animation"
+              style={{ animationPlayState: (isHovered || selectedThemeId) ? 'paused' : undefined }}
+              className={`flex gap-6 min-w-max px-4 py-8 pointer-events-auto animate-marquee ${(isHovered || selectedThemeId) ? 'is-paused' : ''}`}
             >
               {duplicatedThemes.map((theme, index) => {
             // Give specific visual character to different slots
@@ -133,10 +141,17 @@ export const ThemesSection: React.FC = () => {
                 <div
                   onClick={() => handleOpenTheme(theme.id)}
                   onMouseEnter={() => {
+                    setIsHovered(true);
                     playHover();
                     playUiBeep(800 + (index % 7) * 80);
                   }}
-                  className={`group relative bg-[#0a0f1d] border-2 w-[85vw] sm:w-[45vw] md:w-[28vw] flex-shrink-0 cursor-pointer ${
+                  onMouseLeave={() => setIsHovered(false)}
+                  onPointerEnter={() => setIsHovered(true)}
+                  onPointerLeave={() => setIsHovered(false)}
+                  onTouchStart={() => setIsHovered(true)}
+                  onTouchEnd={() => setIsHovered(false)}
+                  onTouchCancel={() => setIsHovered(false)}
+                  className={`carousel-slot group relative bg-[#0a0f1d] border-2 w-[85vw] sm:w-[45vw] md:w-[28vw] flex-shrink-0 cursor-pointer ${
                     isRedAccent
                       ? 'border-[#1e293b] hover:border-[#cc0000] hover:shadow-[0_0_25px_rgba(204,0,0,0.3)]'
                       : isAmberAccent

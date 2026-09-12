@@ -29,7 +29,7 @@ export const MemberCarousel: React.FC<MemberCarouselProps> = ({ title, subtitle,
     }
   };
 
-  const duplicatedMembers = Array(16).fill(members).flat();
+  const duplicatedMembers = Array(4).fill(members).flat();
 
   const content = duplicatedMembers.map((member, index) => {
     const isEventCoordinator = member.group === 'EVENT COORDINATORS';
@@ -48,10 +48,17 @@ export const MemberCarousel: React.FC<MemberCarouselProps> = ({ title, subtitle,
         )}
         <div
           onMouseEnter={() => {
+            setIsHovered(true);
             playHover();
             playUiBeep(900 + (index % members.length) * 50);
           }}
-          className={`group relative h-80 flex-shrink-0 cursor-pointer overflow-hidden clip-chamfer border-2 border-[#1e293b] hover:border-[#00A3FF] hover:-translate-y-2 transition-all bg-[#0a0f1d] ${
+          onMouseLeave={() => setIsHovered(false)}
+          onPointerEnter={() => setIsHovered(true)}
+          onPointerLeave={() => setIsHovered(false)}
+          onTouchStart={() => setIsHovered(true)}
+          onTouchEnd={() => setIsHovered(false)}
+          onTouchCancel={() => setIsHovered(false)}
+          className={`carousel-slot group relative h-80 flex-shrink-0 cursor-pointer overflow-hidden clip-chamfer border-2 border-[#1e293b] hover:border-[#00A3FF] hover:-translate-y-2 transition-all bg-[#0a0f1d] ${
             gridMode ? 'w-full' : 'w-64 snap-center'
           }`}
         >
@@ -61,7 +68,13 @@ export const MemberCarousel: React.FC<MemberCarouselProps> = ({ title, subtitle,
           {/* Member Image (Placeholder if none) */}
           <div className="absolute inset-0">
             {member.image ? (
-              <img src={member.image} alt={member.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+              <img
+                src={member.image}
+                alt={member.name}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+              />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gray-900 group-hover:bg-gray-800 transition-colors">
                 <span className="text-gray-600 font-mono text-4xl font-bold">?</span>
@@ -164,21 +177,29 @@ export const MemberCarousel: React.FC<MemberCarouselProps> = ({ title, subtitle,
       )}
       
       <div 
-        className="relative overflow-hidden" 
+        className="relative overflow-hidden pause-marquee" 
         onMouseEnter={() => setIsHovered(true)} 
         onMouseLeave={() => setIsHovered(false)}
+        onPointerEnter={() => setIsHovered(true)}
+        onPointerLeave={() => setIsHovered(false)}
+        onTouchStart={() => setIsHovered(true)}
+        onTouchEnd={() => setIsHovered(false)}
+        onTouchCancel={() => setIsHovered(false)}
         onWheel={handleWheel}
       >
         <motion.div
           drag="x"
           style={{ x: dragX }}
-          dragConstraints={{ left: -15000, right: 15000 }}
+          dragConstraints={{ left: -3000, right: 3000 }}
           dragElastic={0.15}
-          className="cursor-grab active:cursor-grabbing"
+          onDragStart={() => setIsHovered(true)}
+          onDragEnd={() => setIsHovered(false)}
+          className="cursor-grab active:cursor-grabbing touch-pan-y"
         >
           {/* Continuous Moving Carousel */}
           <div 
-            className="flex gap-6 min-w-max px-4 py-8 pointer-events-auto animate-marquee hover:pause-animation"
+            style={{ animationPlayState: isHovered ? 'paused' : undefined }}
+            className={`flex gap-6 min-w-max px-4 py-8 pointer-events-auto animate-marquee ${isHovered ? 'is-paused' : ''}`}
           >
             {content}
           </div>

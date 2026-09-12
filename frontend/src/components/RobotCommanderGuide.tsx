@@ -11,7 +11,12 @@ interface RobotCommanderGuideProps {
 type CharacterState = 'IDLE' | 'WAIT' | 'WAVE' | 'THINK' | 'FLY' | 'TRANSFORM' | 'HERO_POSE' | 'RETURN';
 
 export const RobotCommanderGuide: React.FC<RobotCommanderGuideProps> = ({ currentSection }) => {
-  const [isMinimized, setIsMinimized] = useState<boolean>(false);
+  const [isMinimized, setIsMinimized] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
   const [activeLineIndex, setActiveLineIndex] = useState<number>(0);
   const [displayedText, setDisplayedText] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(false);
@@ -41,7 +46,7 @@ export const RobotCommanderGuide: React.FC<RobotCommanderGuideProps> = ({ curren
         setIsTyping(false);
         clearInterval(interval);
       }
-    }, 28);
+    }, 32);
 
     return () => clearInterval(interval);
   }, [currentLine]);
@@ -236,11 +241,11 @@ export const RobotCommanderGuide: React.FC<RobotCommanderGuideProps> = ({ curren
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end pointer-events-none select-none font-orbitron">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end pointer-events-none select-none font-orbitron max-w-[calc(100vw-2rem)]">
       <AnimatePresence>
         {!isMinimized && (
           <motion.div
-            className="mb-3 max-w-sm sm:max-w-md w-full bg-black/75 border border-[#00A3FF]/40 p-4 backdrop-blur-md relative clip-commander-bubble shadow-[0_0_30px_rgba(0,0,0,0.9)] pointer-events-auto"
+            className="mb-3 max-w-[calc(100vw-2rem)] sm:max-w-md w-full bg-black/85 border border-[#00A3FF]/40 p-4 backdrop-blur-md relative clip-commander-bubble shadow-[0_0_30px_rgba(0,0,0,0.9)] pointer-events-auto"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}

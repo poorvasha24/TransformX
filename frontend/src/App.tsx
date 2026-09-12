@@ -74,12 +74,13 @@ export default function App() {
   const [showIntro, setShowIntro] = useState<boolean>(true);
   const [activeSection, setActiveSection] = useState<string>('hero');
 
-  // Track active section on scroll
+  // Track active section on scroll without layout thrashing
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['hero', 'event', 'themes', 'roadmap', 'about', 'register'];
-      const scrollPosition = window.scrollY + 250;
+    let ticking = false;
+    const sections = ['hero', 'event', 'themes', 'roadmap', 'about', 'register'];
 
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + 250;
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -90,6 +91,14 @@ export default function App() {
             break;
           }
         }
+      }
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection);
+        ticking = true;
       }
     };
 

@@ -162,37 +162,38 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
       <div className="absolute inset-0 bg-cyber-grid opacity-30 pointer-events-none" />
 
       {/* Top HUD Controls: Sound & Skip */}
-      <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-50 pointer-events-auto">
-        <div className="flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 border border-cyan-500/40 clip-chamfer">
+      <div className="absolute top-4 left-4 right-4 sm:top-6 sm:left-6 sm:right-6 flex items-center justify-between z-50 pointer-events-auto">
+        <div className="flex items-center gap-2 sm:gap-3 bg-black/60 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 border border-cyan-500/40 clip-chamfer">
           <div className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-          <span className="font-mono text-xs tracking-widest text-cyan-400">
-            SYSTEM_INITIALIZATION // PROTOCOL_07
+          <span className="font-mono text-[10px] sm:text-xs tracking-widest text-cyan-400">
+            <span className="hidden sm:inline">SYSTEM_INITIALIZATION // </span>PROTOCOL_07
           </span>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={toggleSound}
-            className="flex items-center gap-2 bg-[#0c1527] hover:bg-[#1a2b4c] text-cyan-400 px-4 py-2 border border-cyan-500/40 clip-chamfer transition-all duration-200 text-xs font-mono tracking-wider cursor-pointer pointer-events-auto"
+            aria-label={isMuted ? "Unmute Audio" : "Mute Audio"}
+            className="flex items-center gap-1.5 sm:gap-2 bg-[#0c1527] hover:bg-[#1a2b4c] text-cyan-400 px-2.5 sm:px-4 py-1.5 sm:py-2 border border-cyan-500/40 clip-chamfer transition-all duration-200 text-[11px] sm:text-xs font-mono tracking-wider cursor-pointer pointer-events-auto"
           >
             {isMuted ? (
               <>
                 <VolumeX className="w-4 h-4 text-red-400" />
-                <span>AUDIO: MUTED</span>
+                <span className="hidden sm:inline">AUDIO: MUTED</span>
               </>
             ) : (
               <>
                 <Volume2 className="w-4 h-4 text-cyan-400 animate-pulse" />
-                <span>AUDIO: ACTIVE</span>
+                <span className="hidden sm:inline">AUDIO: ACTIVE</span>
               </>
             )}
           </button>
 
           <button
             onClick={handleSkip}
-            className="flex items-center gap-2 bg-red-950/80 hover:bg-red-900 text-red-300 hover:text-white px-4 py-2 border border-red-500/60 clip-chamfer transition-all duration-200 text-xs font-mono tracking-wider cursor-pointer pointer-events-auto group"
+            className="flex items-center gap-1.5 sm:gap-2 bg-red-950/80 hover:bg-red-900 text-red-300 hover:text-white px-3 sm:px-4 py-1.5 sm:py-2 border border-red-500/60 clip-chamfer transition-all duration-200 text-[11px] sm:text-xs font-mono tracking-wider cursor-pointer pointer-events-auto group whitespace-nowrap"
           >
-            <span>SKIP SEQUENCE [ESC]</span>
+            <span>SKIP<span className="hidden sm:inline"> SEQUENCE [ESC]</span></span>
             <FastForward className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -200,7 +201,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
 
       {!hasStarted ? (
         <div className="relative z-50 flex flex-col items-center">
-          <h1 className="font-black text-5xl sm:text-7xl mb-8 tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] uppercase">
+          <h1 className="font-black text-3xl sm:text-5xl md:text-7xl mb-8 tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] uppercase text-center px-4">
             COMMAND PORTAL
           </h1>
           <button
@@ -226,9 +227,6 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
                   className="relative w-24 h-[650px] flex items-center justify-center"
                   initial={{
                     x: '-120vw',
-                    y: '-60vh',
-                    rotate: -65,
-                    scale: 0.6,
                     y: 40,
                     rotate: 90,
                     scale: 1.0,
@@ -271,11 +269,11 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
                   {/* Removed distracting Energetic Swoosh Tail & Plasma Streak */}
 
                   {/* 3D Sword Architecture (Optimus Inspired Mechanical Blade) */}
-                  <div 
+                  <div
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px]"
                     style={{ filter: 'drop-shadow(0px 0px 40px rgba(0,240,255,0.8)) drop-shadow(0px 0px 80px rgba(239,68,68,0.4))' }}
                   >
-                    <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
+                    <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 10], fov: 45 }}>
                       <React.Suspense fallback={null}>
                         <SwordModel />
                       </React.Suspense>
@@ -513,7 +511,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
                     </svg>
                   </motion.div>
                 </motion.div>
-                <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-400 drop-shadow-[0_0_35px_rgba(0,240,255,0.7)] select-none">
+                <h1 className="text-3xl min-[400px]:text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-400 drop-shadow-[0_0_35px_rgba(0,240,255,0.7)] select-none whitespace-nowrap">
                   TRANSFORM<span className="text-transparent bg-clip-text bg-gradient-to-b from-red-500 to-red-700 drop-shadow-[0_0_35px_rgba(239,68,68,0.9)]">X</span>
                 </h1>
 
@@ -564,15 +562,15 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
 
               {/* Tactical Bottom Telemetry Bar */}
               <motion.div
-                className="mt-8 flex items-center gap-6 text-slate-400 font-mono text-xs tracking-wider"
+                className="mt-8 flex flex-wrap justify-center items-center gap-2 sm:gap-6 text-slate-400 font-mono text-[10px] sm:text-xs tracking-wider px-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2 }}
               >
                 <span className="text-cyan-400">[CORE_STATUS: OPERATIONAL]</span>
-                <span className="text-slate-600">|</span>
+                <span className="text-slate-600 hidden sm:inline">|</span>
                 <span className="text-red-400">[WARP_DRIVE: SYNCHRONIZED]</span>
-                <span className="text-slate-600">|</span>
+                <span className="text-slate-600 hidden sm:inline">|</span>
                 <span className="text-emerald-400">[COMMAND_READY]</span>
               </motion.div>
             </motion.div>

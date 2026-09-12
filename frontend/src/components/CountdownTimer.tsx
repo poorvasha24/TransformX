@@ -55,17 +55,17 @@ export const CountdownTimer: React.FC = () => {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-4">
+    <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-4">
       {/* Sophisticated Dark Countdown Timer Grid */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 md:gap-6">
+      <div className="flex flex-nowrap items-center justify-center gap-1.5 min-[360px]:gap-2 min-[400px]:gap-3 sm:gap-4 md:gap-6">
         {units.map((unit, idx) => (
           <React.Fragment key={unit.label}>
-            <div className="w-20 sm:w-24 md:w-28 h-20 sm:h-24 md:h-28 bg-[#0a0f1d] border-2 border-[#1e293b] flex flex-col items-center justify-center relative shadow-[0_4px_20px_rgba(0,0,0,0.8)] group hover:border-[#00A3FF]/60 transition-colors">
+            <div className="w-16 min-[360px]:w-[70px] min-[400px]:w-20 sm:w-24 md:w-28 h-16 min-[360px]:h-[70px] min-[400px]:h-20 sm:h-24 md:h-28 flex-shrink-0 bg-[#0a0f1d] border-2 border-[#1e293b] flex flex-col items-center justify-center relative shadow-[0_4px_20px_rgba(0,0,0,0.8)] group hover:border-[#00A3FF]/60 transition-colors">
               {/* Top Accent Line */}
               <div className="absolute top-0 left-0 w-full h-1 bg-[#cc0000]" />
 
               {/* Number Value */}
-              <span className="text-2xl sm:text-3xl md:text-4xl font-black text-white font-orbitron tracking-tight">
+              <span className="text-lg min-[360px]:text-xl min-[400px]:text-2xl sm:text-3xl md:text-4xl font-black text-white font-orbitron tracking-tight">
                 {unit.value}
               </span>
 
@@ -86,12 +86,12 @@ export const CountdownTimer: React.FC = () => {
       </div>
 
       {/* Target Date HUD Sub-badge */}
-      <div className="mt-4 flex items-center justify-center gap-4 text-[10px] font-mono text-gray-500 tracking-widest uppercase">
+      <div className="mt-4 flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-4 text-[9px] min-[360px]:text-[10px] font-mono text-gray-500 tracking-wider uppercase text-center">
         <span className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#00A3FF] animate-pulse" />
           TARGET: 25 SEP 2026 // 09:00 IST
         </span>
-        <span>|</span>
+        <span className="hidden sm:inline">|</span>
         <span className="text-[#00A3FF]">CHRONO_STATUS: LOCKED</span>
       </div>
     </div>
