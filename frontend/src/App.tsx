@@ -62,7 +62,7 @@ const prospectiveMembers = generateMembers(5, 'Prospective Member').map((member,
 });
 
 const eventCoordinators = generateMembers(6, 'Event Coordinator').map((member, index) => {
-  if (index === 0) { return { name: 'Poorvasha K', role: 'Event Coordinator', image: '' }; }
+  if (index === 0) { return { name: 'Poorvasha K', role: 'Event Coordinator', image: '/images/poorvasha.jpeg' }; }
   if (index === 1) { return { name: 'Harsharani R B', role: 'Event Coordinator', image: '/images/harshu.jpeg' }; }
   if (index === 2) { return { name: 'Dhayaa Shri S', role: 'Event Coordinator', image: '' }; }
   if (index === 3) { return { name: 'Darshana S', role: 'Event Coordinator', image: '/images/dharshana.jpeg' }; }

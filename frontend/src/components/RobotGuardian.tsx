@@ -28,7 +28,7 @@ function TruckModel() {
         We can wrap it in a group to adjust if needed.
       */}
       <group position={[0, 0, 0]}>
-        <primitive object={clonedScene} scale={1.8} />
+        <primitive object={clonedScene} scale={1.38} />
       </group>
     </group>
   );
@@ -43,7 +43,7 @@ export const RobotGuardian: React.FC<{ scrollProgress: MotionValue<number> }> = 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const cameraZoom = windowWidth < 480 ? 6.5 : windowWidth < 640 ? 7.5 : windowWidth < 1024 ? 14 : 20;
+  const cameraZoom = windowWidth < 480 ? 7 : windowWidth < 640 ? 8.5 : windowWidth < 1024 ? 12 : 16;
 
   // --- PATH TRACING MATH ---
   const topMovement = useTransform(scrollProgress, (p: number) => {
@@ -98,7 +98,7 @@ export const RobotGuardian: React.FC<{ scrollProgress: MotionValue<number> }> = 
   return (
     <motion.div
       style={{ top: topMovement, left: leftMovement, rotate: rotation, x: "-50%", y: "-50%" }}
-      className="absolute w-20 h-20 sm:w-28 sm:h-28 md:w-40 md:h-40 lg:w-72 lg:h-72 flex items-center justify-center z-[60] pointer-events-none"
+      className="absolute w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44 lg:w-64 lg:h-64 flex items-center justify-center z-[60] pointer-events-none"
     >
       <div className="relative w-full h-full flex flex-col items-center justify-center pointer-events-none">
         <Canvas
@@ -117,7 +117,7 @@ export const RobotGuardian: React.FC<{ scrollProgress: MotionValue<number> }> = 
         {/* Dynamic Status Display */}
         <motion.div
           style={{ rotate: useTransform(rotation, (r) => -r) }}
-          className="absolute -bottom-2 sm:-bottom-3 lg:-bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5 sm:gap-1 bg-black/80 border border-[#00A3FF]/40 px-1 py-0.5 sm:px-1.5 sm:py-0.5 lg:px-2 rounded-sm backdrop-blur-md whitespace-nowrap pointer-events-none"
+          className="absolute -bottom-2 sm:-bottom-2.5 lg:-bottom-3.5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5 sm:gap-1 bg-black/85 border border-[#00A3FF]/50 px-1.5 py-0.5 sm:px-2 sm:py-0.5 lg:px-2.5 rounded-sm backdrop-blur-md whitespace-nowrap pointer-events-none shadow-[0_0_10px_rgba(0,163,255,0.3)]"
         >
           <div className="flex items-center gap-1 sm:gap-1.5">
             <motion.div
@@ -125,7 +125,7 @@ export const RobotGuardian: React.FC<{ scrollProgress: MotionValue<number> }> = 
               className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full animate-ping shrink-0"
             />
             <motion.span
-              className="font-mono text-[6.5px] sm:text-[7.5px] lg:text-[8px] tracking-tight sm:tracking-wider lg:tracking-widest"
+              className="font-mono text-[6.5px] sm:text-[7.5px] lg:text-[8px] tracking-tight sm:tracking-wider lg:tracking-widest font-semibold"
               style={{ color: useTransform(isFinalStatus, [0, 1], ['#00A3FF', '#ff4500']) }}
             >
               {/* @ts-ignore - framer motion types weirdness with strings */}
