@@ -268,7 +268,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
                   {/* Removed distracting Energetic Swoosh Tail & Plasma Streak */}
 
                   {/* 3D Sword Architecture (Optimus Inspired Mechanical Blade) */}
-                  <div 
+                  <div
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px]"
                     style={{ filter: 'drop-shadow(0px 0px 40px rgba(0,240,255,0.8)) drop-shadow(0px 0px 80px rgba(239,68,68,0.4))' }}
                   >
