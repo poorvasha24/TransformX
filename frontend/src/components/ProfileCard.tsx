@@ -9,6 +9,7 @@ export interface ProfileCardProps {
   enableTilt?: boolean;
   enableMobileTilt?: boolean;
   index?: number;
+  className?: string;
 }
 
 export const ProfileCard: React.FC<ProfileCardProps> = ({
@@ -18,6 +19,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
   enableTilt = true,
   enableMobileTilt = false,
   index = 0,
+  className = '',
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -77,11 +79,9 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
 
   const canTilt = enableTilt && (!isTouch || enableMobileTilt);
 
-  const formattedId = `COORD // 0${(index % 9) + 1}`;
-
   return (
     <div
-      className="relative w-full max-w-[320px] mx-auto group select-none"
+      className={`relative w-full ${className || 'max-w-[320px]'} mx-auto group select-none`}
       style={{
         perspective: '1000px',
       }}
@@ -179,13 +179,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
         />
 
         {/* Futuristic Technical Top HUD Header */}
-        <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none z-10 px-1">
-          <div className="flex items-center gap-1.5 bg-[#05070a]/75 backdrop-blur-sm px-2 py-0.5 rounded border border-[#00A3FF]/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00A3FF] animate-pulse shadow-[0_0_6px_#00A3FF]" />
-            <span className="font-mono text-[10px] text-[#00A3FF] tracking-widest uppercase">
-              {formattedId}
-            </span>
-          </div>
+        <div className="absolute top-3 right-3 pointer-events-none z-10">
           <div className="bg-[#05070a]/75 backdrop-blur-sm px-2 py-0.5 rounded border border-[#00A3FF]/20">
             <span className="font-mono text-[9px] text-gray-400 tracking-wider">TX // 2026</span>
           </div>
