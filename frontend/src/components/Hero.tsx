@@ -168,11 +168,11 @@ export const Hero: React.FC<HeroProps> = ({
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-[10px] font-mono tracking-[0.5em] text-[#00A3FF] mb-4 flex items-center justify-center gap-3 sm:gap-4 uppercase"
+          className="text-[9px] sm:text-[10px] font-mono tracking-[0.2em] sm:tracking-[0.5em] text-[#00A3FF] mb-3 sm:mb-4 flex items-center justify-center gap-2 sm:gap-4 uppercase"
         >
-          <span className="w-8 sm:w-12 h-[1px] bg-[#00A3FF]/40" />
+          <span className="w-6 sm:w-12 h-[1px] bg-[#00A3FF]/40" />
           <span>MISSION PROTOCOL ACTIVATED</span>
-          <span className="w-8 sm:w-12 h-[1px] bg-[#00A3FF]/40" />
+          <span className="w-6 sm:w-12 h-[1px] bg-[#00A3FF]/40" />
         </motion.div>
 
         {/* MASSIVE TITULAR WORDMARK: TRANSFORMX */}
@@ -195,7 +195,7 @@ export const Hero: React.FC<HeroProps> = ({
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mt-2 text-xs min-[400px]:text-sm sm:text-lg md:text-xl font-bold tracking-[0.25em] sm:tracking-[0.4em] text-[#cc0000] uppercase font-mono text-center"
+          className="mt-2 text-xs min-[400px]:text-sm sm:text-lg md:text-xl font-bold tracking-[0.2em] sm:tracking-[0.4em] text-[#cc0000] uppercase font-mono text-center px-2"
         >
           TRANSFORM. BUILD. DEPLOY THE FUTURE.
         </motion.div>
@@ -205,7 +205,7 @@ export const Hero: React.FC<HeroProps> = ({
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35 }}
-          className="mt-4 max-w-2xl text-slate-400 font-normal text-sm sm:text-base leading-relaxed font-sans"
+          className="mt-3 sm:mt-4 max-w-2xl text-slate-400 font-normal text-xs sm:text-base leading-relaxed font-sans px-2"
         >
           A premier engineering hackathon where ideas transform into intelligent solutions.
           Architect real-world solutions across 7 innovation domains.
@@ -216,7 +216,7 @@ export const Hero: React.FC<HeroProps> = ({
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45 }}
-          className="w-full mt-8"
+          className="w-full mt-6 sm:mt-8"
         >
           <CountdownTimer />
         </motion.div>
@@ -226,10 +226,10 @@ export const Hero: React.FC<HeroProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.55 }}
-          className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+          className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 w-full max-w-md sm:max-w-none"
         >
           {/* Primary CTA: INITIATE REGISTRATION (Parallelogram Clip Path) */}
-          <div className="relative group cursor-pointer">
+          <div className="relative group cursor-pointer w-full sm:w-auto">
             <div className="absolute inset-0 bg-[#cc0000] blur-xl opacity-20 group-hover:opacity-40 transition-opacity" />
             <button
               onClick={() => {
@@ -237,7 +237,7 @@ export const Hero: React.FC<HeroProps> = ({
                 onInitiateRegister();
               }}
               onMouseEnter={playHover}
-              className="relative px-8 sm:px-12 py-4 sm:py-5 bg-[#cc0000] hover:bg-[#b00000] text-white font-black tracking-[0.2em] uppercase text-sm sm:text-base border-2 border-white/20 transition-all cursor-pointer flex items-center justify-center gap-3 clip-parallelogram"
+              className="relative w-full sm:w-auto px-6 sm:px-12 py-3.5 sm:py-5 bg-[#cc0000] hover:bg-[#b00000] text-white font-black tracking-[0.15em] sm:tracking-[0.2em] uppercase text-xs sm:text-base border-2 border-white/20 transition-all cursor-pointer flex items-center justify-center gap-2.5 sm:gap-3 clip-parallelogram"
             >
               <Zap className="w-4 h-4 text-white animate-pulse" />
               <span>INITIATE REGISTRATION</span>
@@ -253,7 +253,7 @@ export const Hero: React.FC<HeroProps> = ({
               onExploreThemes();
             }}
             onMouseEnter={playHover}
-            className="px-6 py-4 bg-[#0a0f1d] hover:bg-[#121a30] text-slate-300 hover:text-[#00A3FF] font-mono font-bold text-xs uppercase tracking-[0.2em] border border-[#1e293b] hover:border-[#00A3FF]/50 transition-all cursor-pointer flex items-center gap-2"
+            className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-4 bg-[#0a0f1d] hover:bg-[#121a30] text-slate-300 hover:text-[#00A3FF] font-mono font-bold text-xs uppercase tracking-[0.18em] sm:tracking-[0.2em] border border-[#1e293b] hover:border-[#00A3FF]/50 transition-all cursor-pointer flex items-center justify-center gap-2"
           >
             <Layers className="w-4 h-4 text-[#00A3FF]" />
             <span>SEVEN DOMAINS</span>
@@ -266,7 +266,7 @@ export const Hero: React.FC<HeroProps> = ({
               onViewRoadmap();
             }}
             onMouseEnter={playHover}
-            className="px-6 py-4 bg-[#0a0f1d] hover:bg-[#121a30] text-slate-400 hover:text-white font-mono font-bold text-xs uppercase tracking-[0.2em] border border-[#1e293b] hover:border-slate-600 transition-all cursor-pointer flex items-center gap-2"
+            className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-4 bg-[#0a0f1d] hover:bg-[#121a30] text-slate-400 hover:text-white font-mono font-bold text-xs uppercase tracking-[0.18em] sm:tracking-[0.2em] border border-[#1e293b] hover:border-slate-600 transition-all cursor-pointer flex items-center justify-center gap-2"
           >
             <Shield className="w-4 h-4 text-slate-500" />
             <span>TIMELINE</span>

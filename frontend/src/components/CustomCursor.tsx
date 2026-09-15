@@ -70,7 +70,7 @@ export const CustomCursor: React.FC = () => {
   if (!enabled) return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
+    <div className="hidden md:block pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
       {/* Energy trail dots */}
       {trailRef.current.map((point, idx) => (
         <div

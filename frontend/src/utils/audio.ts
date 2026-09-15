@@ -87,7 +87,7 @@ function scheduleNote(beatNumber: number, time: number, ctx: AudioContext) {
   hatNoise.start(time);
 
   // 4. Driving Bassline (Syncopated)
-  const bassSequence = [41, 0, 41, 0, 41, 41, 0, 48, 41, 0, 53, 0, 41, 41, 0, 36]; 
+  const bassSequence = [41, 0, 41, 0, 41, 41, 0, 48, 41, 0, 53, 0, 41, 41, 0, 36];
   const bassFreq = bassSequence[beatNumber];
   if (bassFreq > 0) {
     const bassOsc = ctx.createOscillator();
@@ -111,7 +111,7 @@ function scheduleNote(beatNumber: number, time: number, ctx: AudioContext) {
 }
 
 function nextNote() {
-  const secondsPerStep = secondsPerBeat / 4; 
+  const secondsPerStep = secondsPerBeat / 4;
   nextNoteTime += secondsPerStep;
   current16thNote++;
   if (current16thNote === 16) {
@@ -138,10 +138,10 @@ export function setSoundEnabled(enabled: boolean) {
       bgGain = ctx.createGain();
       bgGain.gain.value = 0; // Start at 0 for fade in
       bgGain.connect(ctx.destination);
-      
+
       // Fade in smoothly over 2 seconds
       bgGain.gain.setTargetAtTime(0.25, ctx.currentTime, 0.5);
-      
+
       nextNoteTime = ctx.currentTime + 0.1;
       current16thNote = 0;
       scheduler(ctx);
@@ -150,7 +150,7 @@ export function setSoundEnabled(enabled: boolean) {
     if (bgGain) {
       // Fade out smoothly
       bgGain.gain.setTargetAtTime(0, audioCtx!.currentTime, 0.5);
-      
+
       setTimeout(() => {
         if (bgSequenceTimer !== null && !isSoundEnabled) {
           window.clearTimeout(bgSequenceTimer);
@@ -172,15 +172,15 @@ export function playIntroSwoosh() {
   if (!isSoundEnabled) return;
   const ctx = getAudioContext();
   if (!ctx) return;
-  
+
   const now = ctx.currentTime;
-  
+
   // High-speed air swoosh
   const bufferSize = ctx.sampleRate * 1.5;
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
   const data = buffer.getChannelData(0);
   for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-  
+
   const noise = ctx.createBufferSource();
   noise.buffer = buffer;
   const noiseFilter = ctx.createBiquadFilter();
@@ -189,17 +189,17 @@ export function playIntroSwoosh() {
   noiseFilter.frequency.exponentialRampToValueAtTime(3000, now + 0.8);
   noiseFilter.frequency.exponentialRampToValueAtTime(100, now + 1.2);
   noiseFilter.Q.value = 1.5;
-  
+
   const noiseGain = ctx.createGain();
   noiseGain.gain.setValueAtTime(0.01, now);
   noiseGain.gain.exponentialRampToValueAtTime(0.4, now + 0.8);
   noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
-  
+
   noise.connect(noiseFilter);
   noiseFilter.connect(noiseGain);
   noiseGain.connect(ctx.destination);
   noise.start(now);
-  
+
   // Rising energy tone
   const osc = ctx.createOscillator();
   const oscGain = ctx.createGain();
@@ -250,7 +250,7 @@ export function playIntroImpact() {
   plasmaGain.connect(ctx.destination);
   plasmaOsc.start(now);
   plasmaOsc.stop(now + 0.5);
-  
+
   // Metallic Clang
   const clangOsc = ctx.createOscillator();
   const clangGain = ctx.createGain();
@@ -275,7 +275,7 @@ export function playIntroThunder() {
 
   const now = ctx.currentTime;
   const duration = 4.0;
-  
+
   // 1. White Noise Generator for the Crash
   const bufferSize = ctx.sampleRate * duration;
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
@@ -284,7 +284,7 @@ export function playIntroThunder() {
     // Generate pink-ish noise (weighted towards lower frequencies)
     data[i] = (Math.random() * 2 - 1) * 0.8 + (Math.random() * 2 - 1) * 0.2;
   }
-  
+
   const noise = ctx.createBufferSource();
   noise.buffer = buffer;
 
@@ -305,7 +305,7 @@ export function playIntroThunder() {
   noise.connect(filter);
   filter.connect(gain);
   gain.connect(ctx.destination);
-  
+
   noise.start(now);
   noise.stop(now + duration);
 
@@ -315,14 +315,14 @@ export function playIntroThunder() {
   subOsc.type = 'sine';
   subOsc.frequency.setValueAtTime(80, now);
   subOsc.frequency.exponentialRampToValueAtTime(20, now + duration);
-  
+
   subGain.gain.setValueAtTime(0, now);
   subGain.gain.linearRampToValueAtTime(1.0, now + 0.1);
   subGain.gain.exponentialRampToValueAtTime(0.01, now + duration);
-  
+
   subOsc.connect(subGain);
   subGain.connect(ctx.destination);
-  
+
   subOsc.start(now);
   subOsc.stop(now + duration);
 }
@@ -334,28 +334,28 @@ export function playIntroPanels() {
   if (!isSoundEnabled) return;
   const ctx = getAudioContext();
   if (!ctx) return;
-  
+
   const now = ctx.currentTime;
-  
+
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   const filter = ctx.createBiquadFilter();
-  
+
   osc.type = 'sawtooth';
   osc.frequency.setValueAtTime(60, now);
   osc.frequency.linearRampToValueAtTime(40, now + 0.8);
-  
+
   filter.type = 'bandpass';
   filter.frequency.setValueAtTime(100, now);
   filter.Q.value = 2.0;
-  
+
   gain.gain.setValueAtTime(0.2, now);
   gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
-  
+
   osc.connect(filter);
   filter.connect(gain);
   gain.connect(ctx.destination);
-  
+
   osc.start(now);
   osc.stop(now + 1.0);
 }
@@ -370,20 +370,20 @@ export function playIntroReveal() {
 
   const now = ctx.currentTime;
   const chord = [220, 277.18, 329.63, 440]; // A Major chord
-  
+
   chord.forEach(freq => {
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = 'sawtooth';
     osc.frequency.value = freq;
-    
+
     gain.gain.setValueAtTime(0, now);
     gain.gain.linearRampToValueAtTime(0.1, now + 0.1);
     gain.gain.exponentialRampToValueAtTime(0.01, now + 2.0);
-    
+
     osc.connect(gain);
     gain.connect(ctx.destination);
-    
+
     osc.start(now);
     osc.stop(now + 2.2);
   });
@@ -394,7 +394,7 @@ function duckBackgroundMusic(duration: number) {
   const now = audioCtx.currentTime;
   // Smoothly reduce volume to 30% of its normal max
   bgGain.gain.cancelScheduledValues(now);
-  bgGain.gain.setTargetAtTime(0.05, now, 0.1); 
+  bgGain.gain.setTargetAtTime(0.05, now, 0.1);
   // Restore volume after the sound duration
   bgGain.gain.setTargetAtTime(0.25, now + duration, 0.5);
 }
@@ -488,7 +488,7 @@ export function playNavSelect() {
   duckBackgroundMusic(0.4);
 
   const now = ctx.currentTime;
-  
+
   // High ping
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
@@ -526,7 +526,7 @@ export function playThemeSelect() {
   duckBackgroundMusic(0.6);
 
   const now = ctx.currentTime;
-  
+
   // Power up
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
@@ -568,7 +568,7 @@ export function playPanelOpen() {
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
   const data = buffer.getChannelData(0);
   for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-  
+
   const noise = ctx.createBufferSource();
   noise.buffer = buffer;
   const filter = ctx.createBiquadFilter();
@@ -626,7 +626,7 @@ export function playRegisterClick() {
   duckBackgroundMusic(1.0);
 
   const now = ctx.currentTime;
-  
+
   // Low end punch
   const subOsc = ctx.createOscillator();
   const subGain = ctx.createGain();

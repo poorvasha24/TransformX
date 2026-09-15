@@ -5,7 +5,7 @@ import { playHover, playUiBeep } from '../utils/audio';
 
 export const EventDetails: React.FC = () => {
   return (
-    <section id="event" className="relative py-24 px-4 bg-[#05070a] border-t border-b border-[#1e293b] overflow-hidden">
+    <section id="event" className="relative py-16 sm:py-24 px-4 bg-[#05070a] border-t border-b border-[#1e293b] overflow-hidden">
       {/* Background Cyber Ambient */}
       <div className="absolute inset-0 bg-sophisticated-radial opacity-15 pointer-events-none" />
       <div className="absolute -top-32 right-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl pointer-events-none" />
@@ -40,7 +40,7 @@ export const EventDetails: React.FC = () => {
               playHover();
               playUiBeep(500);
             }}
-            className="group relative bg-[#060a14] border border-[#1e293b] hover:border-[#00A3FF]/50 p-6 clip-chamfer transition-all duration-300 flex flex-col items-center justify-center text-center h-[240px]"
+            className="group relative bg-[#060a14] border border-[#1e293b] hover:border-[#00A3FF]/50 p-5 sm:p-6 clip-chamfer transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[220px] h-auto py-6 sm:h-[240px]"
           >
             <div className="absolute top-0 right-0">
               <div className="bg-[#05070a] border-b border-l border-[#00A3FF]/40 px-3 py-1 font-mono text-[9px] text-[#00A3FF] tracking-widest uppercase">
@@ -72,7 +72,7 @@ export const EventDetails: React.FC = () => {
               playHover();
               playUiBeep(700);
             }}
-            className="group relative bg-[#060a14] border border-[#1e293b] hover:border-[#cc0000]/50 p-6 clip-chamfer transition-all duration-300 flex flex-col items-center justify-center text-center h-[240px]"
+            className="group relative bg-[#060a14] border border-[#1e293b] hover:border-[#cc0000]/50 p-5 sm:p-6 clip-chamfer transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[220px] h-auto py-6 sm:h-[240px]"
           >
             <div className="absolute top-0 right-0">
               <div className="bg-[#05070a] border-b border-l border-[#cc0000]/40 px-3 py-1 font-mono text-[9px] text-[#cc0000] tracking-widest uppercase">
@@ -104,7 +104,7 @@ export const EventDetails: React.FC = () => {
               playHover();
               playUiBeep(900);
             }}
-            className="group relative bg-[#060a14] border border-[#1e293b] hover:border-[#00A3FF]/50 p-6 clip-chamfer transition-all duration-300 flex flex-col items-center justify-center text-center h-[240px]"
+            className="group relative bg-[#060a14] border border-[#1e293b] hover:border-[#00A3FF]/50 p-5 sm:p-6 clip-chamfer transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[220px] h-auto py-6 sm:h-[240px]"
           >
             <div className="absolute top-0 right-0">
               <div className="bg-[#05070a] border-b border-l border-[#00A3FF]/40 px-3 py-1 font-mono text-[9px] text-[#00A3FF] tracking-widest uppercase">
@@ -138,7 +138,7 @@ export const EventDetails: React.FC = () => {
               playHover();
               playUiBeep(1100);
             }}
-            className="group relative bg-[#060a14] border border-[#1e293b] hover:border-[#cc0000]/50 p-6 clip-chamfer transition-all duration-300 flex flex-col items-center justify-center text-center h-[240px]"
+            className="group relative bg-[#060a14] border border-[#1e293b] hover:border-[#cc0000]/50 p-5 sm:p-6 clip-chamfer transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[220px] h-auto py-6 sm:h-[240px]"
           >
             <div className="absolute top-0 right-0">
               <div className="bg-[#05070a] border-b border-l border-[#cc0000]/40 px-3 py-1 font-mono text-[9px] text-[#cc0000] tracking-widest uppercase">

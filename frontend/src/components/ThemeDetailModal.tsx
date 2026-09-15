@@ -57,16 +57,16 @@ export const ThemeDetailModal: React.FC<ThemeDetailModalProps> = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.92, y: 20 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl bg-[#0a0f1d] border-2 border-[#00A3FF] p-6 sm:p-8 clip-chamfer-lg shadow-[0_0_50px_rgba(0,163,255,0.3)] my-auto max-h-[90vh] overflow-y-auto pointer-events-auto"
+          className="relative w-full max-w-4xl bg-[#0a0f1d] border-2 border-[#00A3FF] p-4 sm:p-6 lg:p-8 clip-chamfer-lg shadow-[0_0_50px_rgba(0,163,255,0.3)] my-auto max-h-[90vh] overflow-y-auto pointer-events-auto"
         >
           {/* Top Armor Flange & Close Button */}
-          <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#00A3FF]/30">
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs font-bold px-2.5 py-1 bg-black/80 text-[#00A3FF] border border-[#00A3FF]/50 clip-banner">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-3 sm:pb-4 mb-4 sm:mb-6 border-b border-[#00A3FF]/30">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <span className="font-mono text-[10px] sm:text-xs font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 bg-black/80 text-[#00A3FF] border border-[#00A3FF]/50 clip-banner">
                 DOM_KEY: {theme.armorCode}
               </span>
-              <div className="flex items-center gap-1.5 text-xs font-mono text-gray-400">
-                <Target className="w-4 h-4 text-[#cc0000] animate-pulse" />
+              <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-mono text-gray-400">
+                <Target className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#cc0000] animate-pulse" />
                 <span>TARGET DOMAIN // SECTOR_{theme.number}</span>
               </div>
             </div>
@@ -76,26 +76,26 @@ export const ThemeDetailModal: React.FC<ThemeDetailModalProps> = ({
                 playClick();
                 onClose();
               }}
-              className="p-1.5 bg-[#05070a] border border-[#cc0000]/60 hover:bg-[#cc0000]/20 text-[#cc0000] hover:text-white clip-chamfer transition-colors cursor-pointer flex items-center gap-1 text-xs font-mono"
+              className="p-1.5 px-2 bg-[#05070a] border border-[#cc0000]/60 hover:bg-[#cc0000]/20 text-[#cc0000] hover:text-white clip-chamfer transition-colors cursor-pointer flex items-center gap-1 text-[10px] sm:text-xs font-mono ml-auto"
             >
-              <span>CLOSE BRIEFING</span>
-              <X className="w-4 h-4" />
+              <span>CLOSE</span>
+              <X className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </div>
 
           {/* Main Briefing Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
-              <div className="font-mono text-xs tracking-widest text-[#00A3FF] mb-2 font-bold uppercase">
+              <div className="font-mono text-[10px] sm:text-xs tracking-widest text-[#00A3FF] mb-1.5 sm:mb-2 font-bold uppercase">
                 INNOVATION THEME #{theme.number}
               </div>
-              <h3 className="text-2xl sm:text-4xl font-black tracking-wider text-white uppercase">
+              <h3 className="text-xl xs:text-2xl sm:text-4xl font-black tracking-wider text-white uppercase">
                 {theme.title}
               </h3>
             </div>
 
             {/* Tactical Specs Tag Box */}
-            <div className="bg-black/60 border border-[#1e293b] p-3 clip-chamfer font-mono text-[11px] space-y-1 sm:text-right">
+            <div className="bg-black/60 border border-[#1e293b] p-2.5 sm:p-3 clip-chamfer font-mono text-[10px] sm:text-[11px] space-y-1 sm:text-right">
               <div><span className="text-gray-500">COMPLEXITY: </span><span className="text-amber-400">{theme.tacticalSpecs.complexity}</span></div>
               <div><span className="text-gray-500">SECTOR: </span><span className="text-[#00A3FF]">{theme.tacticalSpecs.deploymentSector}</span></div>
               <div><span className="text-gray-500">FREQ: </span><span className="text-[#cc0000]">{theme.tacticalSpecs.matrixFrequency}</span></div>
@@ -103,9 +103,9 @@ export const ThemeDetailModal: React.FC<ThemeDetailModalProps> = ({
           </div>
 
           {/* 4 CORE TACTICAL CATEGORIES GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 font-sans">
             {/* 1. DOMAIN OVERVIEW */}
-            <div className="bg-[#05070a] border border-[#1e293b] p-5 clip-chamfer">
+            <div className="bg-[#05070a] border border-[#1e293b] p-3.5 sm:p-5 clip-chamfer">
               <div className="flex items-center gap-2 font-mono text-xs font-bold text-[#00A3FF] tracking-wider mb-2 font-orbitron">
                 <Terminal className="w-4 h-4 text-[#00A3FF]" />
                 <span>DOMAIN OVERVIEW [MISSION DATA]</span>

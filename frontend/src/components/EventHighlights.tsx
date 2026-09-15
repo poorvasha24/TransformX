@@ -5,18 +5,18 @@ import { playHover, playUiBeep } from '../utils/audio';
 
 export const EventHighlights: React.FC = () => {
   return (
-    <section className="bg-[#05070a] pt-4 pb-24 flex justify-center border-b border-[#1e293b]">
-      <div className="max-w-7xl w-full px-6">
-        <div className="flex flex-col items-center mb-12 relative z-10">
+    <section className="bg-[#05070a] pt-4 pb-16 sm:pb-24 flex justify-center border-b border-[#1e293b]">
+      <div className="max-w-7xl w-full px-4 sm:px-6">
+        <div className="flex flex-col items-center mb-8 sm:mb-12 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-3 mb-2"
+            className="flex items-center gap-2 sm:gap-3 mb-2"
           >
-            <div className="h-px w-8 bg-gradient-to-r from-transparent to-[#00A3FF]"></div>
-            <span className="font-mono text-[#00A3FF] text-sm tracking-widest font-bold uppercase">OUTCOME METRICS</span>
-            <div className="h-px w-8 bg-gradient-to-l from-transparent to-[#00A3FF]"></div>
+            <div className="h-px w-6 sm:w-8 bg-gradient-to-r from-transparent to-[#00A3FF]"></div>
+            <span className="font-mono text-[#00A3FF] text-xs sm:text-sm tracking-widest font-bold uppercase">OUTCOME METRICS</span>
+            <div className="h-px w-6 sm:w-8 bg-gradient-to-l from-transparent to-[#00A3FF]"></div>
           </motion.div>
           
           <motion.h2
@@ -24,7 +24,7 @@ export const EventHighlights: React.FC = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.5 }}
-            className="text-3xl md:text-5xl font-orbitron font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-gray-400 tracking-wider text-center uppercase"
+            className="text-2xl xs:text-3xl md:text-5xl font-orbitron font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-gray-400 tracking-wider text-center uppercase"
           >
             EVENT HIGHLIGHTS
           </motion.h2>

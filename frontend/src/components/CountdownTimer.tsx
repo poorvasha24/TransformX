@@ -55,14 +55,14 @@ export const CountdownTimer: React.FC = () => {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-4">
+    <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-3 sm:py-4">
       {/* Sophisticated Dark Countdown Timer Grid */}
       <div className="flex flex-nowrap items-center justify-center gap-1.5 min-[360px]:gap-2 min-[400px]:gap-3 sm:gap-4 md:gap-6">
         {units.map((unit, idx) => (
           <React.Fragment key={unit.label}>
-            <div className="w-16 min-[360px]:w-[70px] min-[400px]:w-20 sm:w-24 md:w-28 h-16 min-[360px]:h-[70px] min-[400px]:h-20 sm:h-24 md:h-28 flex-shrink-0 bg-[#0a0f1d] border-2 border-[#1e293b] flex flex-col items-center justify-center relative shadow-[0_4px_20px_rgba(0,0,0,0.8)] group hover:border-[#00A3FF]/60 transition-colors">
+            <div className="w-16 min-[360px]:w-[70px] min-[400px]:w-20 sm:w-24 md:w-28 h-16 min-[360px]:h-[70px] min-[400px]:h-20 sm:h-24 md:h-28 flex-shrink-0 bg-[#0a0f1d] border border-[#1e293b] sm:border-2 flex flex-col items-center justify-center relative shadow-[0_4px_20px_rgba(0,0,0,0.8)] group hover:border-[#00A3FF]/60 transition-colors">
               {/* Top Accent Line */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-[#cc0000]" />
+              <div className="absolute top-0 left-0 w-full h-0.5 sm:h-1 bg-[#cc0000]" />
 
               {/* Number Value */}
               <span className="text-lg min-[360px]:text-xl min-[400px]:text-2xl sm:text-3xl md:text-4xl font-black text-white font-orbitron tracking-tight">
@@ -70,7 +70,7 @@ export const CountdownTimer: React.FC = () => {
               </span>
 
               {/* Label */}
-              <span className="text-[8px] sm:text-[9px] font-mono tracking-widest text-gray-500 uppercase mt-1 font-bold">
+              <span className="text-[7px] xs:text-[8px] sm:text-[9px] font-mono tracking-wider sm:tracking-widest text-gray-500 uppercase mt-0.5 sm:mt-1 font-bold">
                 {unit.label}
               </span>
             </div>
@@ -86,7 +86,7 @@ export const CountdownTimer: React.FC = () => {
       </div>
 
       {/* Target Date HUD Sub-badge */}
-      <div className="mt-4 flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-4 text-[9px] min-[360px]:text-[10px] font-mono text-gray-500 tracking-wider uppercase text-center">
+      <div className="mt-3 sm:mt-4 flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-4 text-[9px] min-[360px]:text-[10px] font-mono text-gray-500 tracking-wider uppercase text-center px-2">
         <span className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#00A3FF] animate-pulse" />
           TARGET: 25 SEP 2026 // 09:00 IST

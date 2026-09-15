@@ -68,7 +68,7 @@ export const ThemesSection: React.FC = () => {
   };
 
   return (
-    <section id="themes" className="relative py-24 px-4 bg-[#05070a] border-t border-b border-[#1e293b] overflow-hidden">
+    <section id="themes" className="relative py-16 sm:py-24 px-4 bg-[#05070a] border-t border-b border-[#1e293b] overflow-hidden">
       {/* Background Cybernetic Ring Matrix */}
       <div className="absolute inset-0 bg-sophisticated-radial opacity-15 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full border border-[#00A3FF]/10 pointer-events-none animate-spin [animation-duration:120s]" />
@@ -76,17 +76,17 @@ export const ThemesSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16">
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-16">
           <div className="text-[10px] font-mono tracking-[0.4em] text-[#cc0000] mb-3 flex items-center justify-center gap-3 uppercase">
             <span className="w-8 h-[1px] bg-[#00A3FF]/40" />
             <span>SECTION 02 // SEVEN DOMAINS</span>
             <span className="w-8 h-[1px] bg-[#00A3FF]/40" />
           </div>
 
-          <h2 className="font-orbitron font-black text-3xl sm:text-5xl tracking-wide text-white uppercase">
+          <h2 className="font-orbitron font-black text-2xl xs:text-3xl sm:text-5xl tracking-wide text-white uppercase">
             SIH <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#cc0000] via-amber-400 to-[#00A3FF]">INNOVATION MATRIX</span>
           </h2>
-          <p className="mt-3 max-w-2xl text-gray-400 font-sans text-sm sm:text-base">
+          <p className="mt-3 max-w-2xl text-gray-400 font-sans text-xs sm:text-base px-2">
             Select an armored mission bay to unlock tactical blueprints, technical parameters, and impact vectors.
           </p>
         </div>
@@ -117,7 +117,7 @@ export const ThemesSection: React.FC = () => {
             {/* Continuous Moving Carousel */}
             <motion.div 
               style={{ animationPlayState: (isHovered || selectedThemeId) ? 'paused' : undefined }}
-              className={`flex gap-6 min-w-max px-4 py-8 pointer-events-auto animate-marquee ${(isHovered || selectedThemeId) ? 'is-paused' : ''}`}
+              className={`flex gap-4 sm:gap-6 min-w-max px-4 py-6 sm:py-8 pointer-events-auto animate-marquee hover:pause-animation ${(isHovered || selectedThemeId) ? 'is-paused' : ''}`}
             >
               {duplicatedThemes.map((theme, index) => {
             // Give specific visual character to different slots
@@ -151,7 +151,7 @@ export const ThemesSection: React.FC = () => {
                   onTouchStart={() => setIsHovered(true)}
                   onTouchEnd={() => setIsHovered(false)}
                   onTouchCancel={() => setIsHovered(false)}
-                  className={`carousel-slot group relative bg-[#0a0f1d] border-2 w-[85vw] sm:w-[45vw] md:w-[28vw] flex-shrink-0 cursor-pointer ${
+                  className={`carousel-slot group relative bg-[#0a0f1d] border-2 w-[82vw] sm:w-[45vw] md:w-[28vw] max-w-[360px] flex-shrink-0 cursor-pointer ${
                     isRedAccent
                       ? 'border-[#1e293b] hover:border-[#cc0000] hover:shadow-[0_0_25px_rgba(204,0,0,0.3)]'
                       : isAmberAccent

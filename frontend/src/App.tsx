@@ -5,6 +5,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { EventDetails } from './components/EventDetails';
 import { EventHighlights } from './components/EventHighlights';
+import { EventSponsors } from './components/EventSponsors';
 import { ThemesSection } from './components/ThemesSection';
 import { RoadmapTimeline } from './components/RoadmapTimeline';
 import { RegisterSection } from './components/RegisterSection';
@@ -13,6 +14,7 @@ import { Footer } from './components/Footer';
 import { AboutSection } from './components/AboutSection';
 import { MemberCarousel } from './components/MemberCarousel';
 import type { Member } from './components/MemberCarousel';
+import { EventCoordinators } from './components/EventCoordinators';
 
 const generateMembers = (count: number, prefix: string): Member[] => {
   return Array.from({ length: count }).map((_, i) => ({
@@ -61,12 +63,12 @@ const prospectiveMembers = generateMembers(5, 'Prospective Member').map((member,
 });
 
 const eventCoordinators = generateMembers(6, 'Event Coordinator').map((member, index) => {
-  if (index === 0) { return { name: 'Poorvasha K', role: 'Event Coordinator', image: '' }; }
-  if (index === 1) { return { name: 'Darshana S', role: 'Event Coordinator', image: '' }; }
-  if (index === 2) { return { name: 'Dhayaa Shri S', role: 'Event Coordinator', image: '' }; }
-  if (index === 3) { return { name: 'Harsharani R B', role: 'Event Coordinator', image: '' }; }
-  if (index === 4) { return { name: 'Praveen Kumar R', role: 'Event Coordinator', image: '' }; }
-  if (index === 5) { return { name: 'Member 6', role: 'Event Coordinator', image: '' }; }
+  if (index === 0) { return { name: 'Poorvasha K', role: 'Event Coordinator', image: '/images/poorvasha.jpeg' }; }
+  if (index === 1) { return { name: 'Dhayaa Shri S', role: 'Event Coordinator', image: '' }; }
+  if (index === 2) { return { name: 'Darshana S', role: 'Event Coordinator', image: '/images/dharshana.jpeg' }; }
+  if (index === 3) { return { name: 'Megesh L', role: 'Event Coordinator', image: '/images/megesg.jpeg' }; }
+  if (index === 4) { return { name: 'Praveen Kumar R', role: 'Event Coordinator', image: '/images/praveen.jpeg' }; }
+  if (index === 5) { return { name: 'Harsharani R B', role: 'Event Coordinator', image: '/images/harshu.jpeg' }; }
   return member;
 });
 
@@ -161,6 +163,9 @@ export default function App() {
             {/* Event Highlights Section */}
             <EventHighlights />
 
+            {/* Event Sponsors Section */}
+            <EventSponsors />
+
             {/* SIH 7 Themes Innovation Matrix */}
             <ThemesSection />
 
@@ -170,11 +175,11 @@ export default function App() {
             {/* About Section */}
             <AboutSection />
 
-            {/* Member Carousels */}
+            {/* Member Carousels & Event Coordinators */}
             <MemberCarousel title="SCOPE MEMBERS" subtitle="CORE LEADERSHIP TEAM" members={coreMembers.map(m => ({ ...m, group: 'SCOPE MEMBERS' }))} gridMode={false} />
+            <EventCoordinators coordinators={eventCoordinators} />
             <MemberCarousel title="MAGIC MEMBERS" subtitle="INNOVATION & STRATEGY" members={magicMembers.map(m => ({ ...m, group: 'MAGIC MEMBERS' }))} gridMode={false} />
             <MemberCarousel title="PROSPECTIVE MAGIC MEMBERS" subtitle="FUTURE INITIATIVES" members={prospectiveMembers.map(m => ({ ...m, group: 'PROSPECTIVE MAGIC MEMBERS' }))} gridMode={false} />
-            <MemberCarousel title="EVENT COORDINATORS" subtitle="LOGISTICS & OPERATIONS" members={eventCoordinators.map(m => ({ ...m, group: 'EVENT COORDINATORS' }))} gridMode={false} />
 
             {/* Register Section */}
             <RegisterSection />

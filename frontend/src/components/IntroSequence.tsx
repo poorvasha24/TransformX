@@ -165,25 +165,25 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
       <div className="absolute top-4 left-4 right-4 sm:top-6 sm:left-6 sm:right-6 flex items-center justify-between z-50 pointer-events-auto">
         <div className="flex items-center gap-2 sm:gap-3 bg-black/60 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 border border-cyan-500/40 clip-chamfer">
           <div className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
-          <span className="font-mono text-[10px] sm:text-xs tracking-widest text-cyan-400">
+          <span className="font-mono text-[10px] sm:text-xs tracking-wider sm:tracking-widest text-cyan-400">
             <span className="hidden sm:inline">SYSTEM_INITIALIZATION // </span>PROTOCOL_07
           </span>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 ml-auto">
           <button
             onClick={toggleSound}
             aria-label={isMuted ? "Unmute Audio" : "Mute Audio"}
-            className="flex items-center gap-1.5 sm:gap-2 bg-[#0c1527] hover:bg-[#1a2b4c] text-cyan-400 px-2.5 sm:px-4 py-1.5 sm:py-2 border border-cyan-500/40 clip-chamfer transition-all duration-200 text-[11px] sm:text-xs font-mono tracking-wider cursor-pointer pointer-events-auto"
+            className="flex items-center gap-1.5 sm:gap-2 bg-[#0c1527] hover:bg-[#1a2b4c] text-cyan-400 px-2.5 sm:px-4 py-1.5 sm:py-2 border border-cyan-500/40 clip-chamfer transition-all duration-200 text-[10.5px] sm:text-xs font-mono tracking-wider cursor-pointer pointer-events-auto"
           >
             {isMuted ? (
               <>
-                <VolumeX className="w-4 h-4 text-red-400" />
+                <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-400" />
                 <span className="hidden sm:inline">AUDIO: MUTED</span>
               </>
             ) : (
               <>
-                <Volume2 className="w-4 h-4 text-cyan-400 animate-pulse" />
+                <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 animate-pulse" />
                 <span className="hidden sm:inline">AUDIO: ACTIVE</span>
               </>
             )}
@@ -191,7 +191,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
 
           <button
             onClick={handleSkip}
-            className="flex items-center gap-1.5 sm:gap-2 bg-red-950/80 hover:bg-red-900 text-red-300 hover:text-white px-3 sm:px-4 py-1.5 sm:py-2 border border-red-500/60 clip-chamfer transition-all duration-200 text-[11px] sm:text-xs font-mono tracking-wider cursor-pointer pointer-events-auto group whitespace-nowrap"
+            className="flex items-center gap-1.5 sm:gap-2 bg-red-950/80 hover:bg-red-900 text-red-300 hover:text-white px-3 sm:px-4 py-1.5 sm:py-2 border border-red-500/60 clip-chamfer transition-all duration-200 text-[10.5px] sm:text-xs font-mono tracking-wider cursor-pointer pointer-events-auto group whitespace-nowrap"
           >
             <span>SKIP<span className="hidden sm:inline"> SEQUENCE [ESC]</span></span>
             <FastForward className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -200,13 +200,13 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
       </div>
 
       {!hasStarted ? (
-        <div className="relative z-50 flex flex-col items-center">
-          <h1 className="font-black text-3xl sm:text-5xl md:text-7xl mb-8 tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] uppercase text-center px-4">
+        <div className="relative z-50 flex flex-col items-center px-4 text-center">
+          <h1 className="font-black text-3xl sm:text-6xl md:text-7xl mb-6 sm:mb-8 tracking-wider sm:tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] uppercase">
             COMMAND PORTAL
           </h1>
           <button
             onClick={handleStart}
-            className="px-12 py-4 bg-[#cc0000] hover:bg-red-500 text-white font-orbitron font-bold tracking-[0.2em] clip-chamfer text-xl transition-all hover:scale-105 shadow-[0_0_20px_#cc0000] hover:shadow-[0_0_40px_#ff0000] cursor-pointer pointer-events-auto"
+            className="px-8 sm:px-12 py-3.5 sm:py-4 bg-[#cc0000] hover:bg-red-500 text-white font-orbitron font-bold tracking-[0.2em] clip-chamfer text-base sm:text-xl transition-all hover:scale-105 shadow-[0_0_20px_#cc0000] hover:shadow-[0_0_40px_#ff0000] cursor-pointer pointer-events-auto"
           >
             START MISSION
           </button>
@@ -412,21 +412,21 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
           {/* STEP 4: REVEAL TRANSFORMX REVEAL & SEQUENTIAL TAGLINE */}
           {step >= 3 && (
             <motion.div
-              className="relative z-20 flex flex-col items-center justify-center text-center px-6 max-w-5xl"
+              className="relative z-20 flex flex-col items-center justify-center text-center px-3 sm:px-6 w-full max-w-5xl"
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
               {/* Top Tactical Label */}
               <motion.div
-                className="flex items-center gap-2 px-4 py-1 mb-4 bg-slate-900/90 border border-cyan-500/40 clip-chamfer font-mono text-xs tracking-widest text-cyan-400"
+                className="flex items-center gap-2 px-2.5 sm:px-4 py-1 mb-3 sm:mb-4 bg-slate-900/90 border border-cyan-500/40 clip-chamfer font-mono text-[9px] sm:text-xs tracking-wider sm:tracking-widest text-cyan-400"
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                <span className="w-6 h-[1px] bg-[#00A3FF]/50" />
+                <span className="w-3 sm:w-6 h-[1px] bg-[#00A3FF]/50" />
                 <span>INNOVATION BATTLEGROUND // 2026</span>
-                <span className="w-6 h-[1px] bg-[#00A3FF]/50" />
+                <span className="w-3 sm:w-6 h-[1px] bg-[#00A3FF]/50" />
               </motion.div>
 
               {/* MAIN TITLE: TRANSFORMX (Mechanical Glitch / Assembly) */}
@@ -434,7 +434,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
 
                 {/* GLOWING ROBOTIC EYES (BACKGROUND BOSS) */}
                 <motion.div
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1200px] h-[400px] pointer-events-none z-[-1] flex items-center justify-between px-4 sm:px-12 md:px-24 lg:px-32"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1200px] h-[300px] sm:h-[400px] pointer-events-none z-[-1] flex items-center justify-between px-2 sm:px-12 md:px-24 lg:px-32"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5, duration: 1 }}
@@ -443,7 +443,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
 
                   {/* Left Eye */}
                   <motion.div
-                    className="relative w-48 sm:w-64 md:w-80 lg:w-[400px] h-24 sm:h-32 md:h-48"
+                    className="relative w-28 xs:w-36 sm:w-64 md:w-80 lg:w-[400px] h-14 xs:h-20 sm:h-32 md:h-48"
                     initial={{ filter: "drop-shadow(0 0 0px rgba(0,240,255,0))", opacity: 0 }}
                     animate={{
                       opacity: [0, 0.4, 0, 0.5, 0.5, 0],
@@ -478,7 +478,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
 
                   {/* Right Eye */}
                   <motion.div
-                    className="relative w-48 sm:w-64 md:w-80 lg:w-[400px] h-24 sm:h-32 md:h-48"
+                    className="relative w-28 xs:w-36 sm:w-64 md:w-80 lg:w-[400px] h-14 xs:h-20 sm:h-32 md:h-48"
                     initial={{ filter: "drop-shadow(0 0 0px rgba(0,240,255,0))", opacity: 0 }}
                     animate={{
                       opacity: [0, 0.4, 0, 0.5, 0.5, 0],
@@ -511,23 +511,23 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
                     </svg>
                   </motion.div>
                 </motion.div>
-                <h1 className="text-3xl min-[400px]:text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-400 drop-shadow-[0_0_35px_rgba(0,240,255,0.7)] select-none whitespace-nowrap">
-                  TRANSFORM<span className="text-transparent bg-clip-text bg-gradient-to-b from-red-500 to-red-700 drop-shadow-[0_0_35px_rgba(239,68,68,0.9)]">X</span>
+                <h1 className="intro-title-responsive font-black tracking-normal sm:tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-400 drop-shadow-[0_0_20px_rgba(0,240,255,0.7)] sm:drop-shadow-[0_0_35px_rgba(0,240,255,0.7)] select-none whitespace-nowrap">
+                  TRANSFORM<span className="text-transparent bg-clip-text bg-gradient-to-b from-red-500 to-red-700 drop-shadow-[0_0_20px_rgba(239,68,68,0.9)] sm:drop-shadow-[0_0_35px_rgba(239,68,68,0.9)]">X</span>
                 </h1>
 
                 {/* Glowing HUD Target Brackets around Title */}
-                <div className="absolute -top-4 -left-6 w-8 h-8 border-t-2 border-l-2 border-cyan-400" />
-                <div className="absolute -top-4 -right-6 w-8 h-8 border-t-2 border-r-2 border-red-500" />
-                <div className="absolute -bottom-4 -left-6 w-8 h-8 border-b-2 border-l-2 border-cyan-400" />
-                <div className="absolute -bottom-4 -right-6 w-8 h-8 border-b-2 border-r-2 border-red-500" />
+                <div className="absolute -top-2 sm:-top-4 -left-2 sm:-left-6 w-4 sm:w-8 h-4 sm:h-8 border-t-2 border-l-2 border-cyan-400" />
+                <div className="absolute -top-2 sm:-top-4 -right-2 sm:-right-6 w-4 sm:w-8 h-4 sm:h-8 border-t-2 border-r-2 border-red-500" />
+                <div className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-6 w-4 sm:w-8 h-4 sm:h-8 border-b-2 border-l-2 border-cyan-400" />
+                <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-6 w-4 sm:w-8 h-4 sm:h-8 border-b-2 border-r-2 border-red-500" />
               </div>
 
               {/* SEQUENTIAL LIGHTING TAGLINE */}
               {/* TRANSFORM -> BUILD -> DEPLOY THE FUTURE */}
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-6 font-mono text-sm sm:text-xl font-bold tracking-widest">
+              <div className="mt-4 sm:mt-6 flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 md:gap-6 font-mono text-[10px] sm:text-lg md:text-xl font-bold tracking-wider sm:tracking-widest">
                 {/* Word 1: TRANSFORM */}
                 <div
-                  className={`px-4 py-1.5 border clip-chamfer transition-all duration-300 ${activeTaglineWord >= 1
+                  className={`px-2 sm:px-4 py-1 sm:py-1.5 border clip-chamfer transition-all duration-300 ${activeTaglineWord >= 1
                     ? 'bg-red-600/30 border-red-500 text-red-300 shadow-[0_0_20px_rgba(239,68,68,0.6)]'
                     : 'bg-slate-900/40 border-slate-700 text-slate-500'
                     }`}
@@ -535,11 +535,11 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
                   TRANSFORM
                 </div>
 
-                <span className="text-cyan-500 text-lg">➔</span>
+                <span className="text-cyan-500 text-xs sm:text-lg">➔</span>
 
                 {/* Word 2: BUILD */}
                 <div
-                  className={`px-4 py-1.5 border clip-chamfer transition-all duration-300 ${activeTaglineWord >= 2
+                  className={`px-2 sm:px-4 py-1 sm:py-1.5 border clip-chamfer transition-all duration-300 ${activeTaglineWord >= 2
                     ? 'bg-blue-600/30 border-blue-500 text-blue-300 shadow-[0_0_20px_rgba(59,130,246,0.6)]'
                     : 'bg-slate-900/40 border-slate-700 text-slate-500'
                     }`}
@@ -547,11 +547,11 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
                   BUILD
                 </div>
 
-                <span className="text-cyan-500 text-lg">➔</span>
+                <span className="text-cyan-500 text-xs sm:text-lg">➔</span>
 
                 {/* Word 3: DEPLOY THE FUTURE */}
                 <div
-                  className={`px-4 py-1.5 border clip-chamfer transition-all duration-300 ${activeTaglineWord >= 3
+                  className={`px-2 sm:px-4 py-1 sm:py-1.5 border clip-chamfer transition-all duration-300 ${activeTaglineWord >= 3
                     ? 'bg-cyan-600/30 border-cyan-400 text-cyan-200 shadow-[0_0_25px_rgba(0,240,255,0.7)]'
                     : 'bg-slate-900/40 border-slate-700 text-slate-500'
                     }`}
@@ -562,7 +562,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
 
               {/* Tactical Bottom Telemetry Bar */}
               <motion.div
-                className="mt-8 flex flex-wrap justify-center items-center gap-2 sm:gap-6 text-slate-400 font-mono text-[10px] sm:text-xs tracking-wider px-2"
+                className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-6 text-slate-400 font-mono text-[9.5px] sm:text-xs tracking-wider px-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2 }}

@@ -241,25 +241,26 @@ export const RobotCommanderGuide: React.FC<RobotCommanderGuideProps> = ({ curren
   };
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end pointer-events-none select-none font-orbitron max-w-[calc(100vw-2rem)]">
+    <div className="fixed bottom-3 right-2.5 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end pointer-events-none select-none font-orbitron max-w-[calc(100vw-1.25rem)] sm:max-w-[360px] lg:max-w-[390px]">
       <AnimatePresence>
         {!isMinimized && (
           <motion.div
-            className="mb-3 max-w-[calc(100vw-2rem)] sm:max-w-md w-full bg-black/85 border border-[#00A3FF]/40 p-4 backdrop-blur-md relative clip-commander-bubble shadow-[0_0_30px_rgba(0,0,0,0.9)] pointer-events-auto"
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            style={{ transformOrigin: 'bottom right' }}
+            className="mb-2 sm:mb-3 w-[calc(100vw-1.75rem)] sm:w-full max-w-[300px] min-[400px]:max-w-[330px] sm:max-w-[350px] lg:max-w-[380px] bg-black/90 border border-[#00A3FF]/40 p-3 sm:p-3.5 lg:p-4 backdrop-blur-md relative clip-commander-bubble shadow-[0_0_30px_rgba(0,0,0,0.9)] pointer-events-auto box-border"
+            initial={{ opacity: 0, y: 15, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            exit={{ opacity: 0, y: 15, scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="absolute -top-1 -right-1 w-2 h-2 bg-[#00A3FF]" />
-            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#00A3FF]/20">
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#00A3FF] animate-ping" />
-                <span className="text-[9px] font-mono text-[#00A3FF] tracking-widest uppercase font-bold">
+            <div className="absolute top-0 right-0 w-2 h-2 bg-[#00A3FF]" />
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#00A3FF]/20 gap-2">
+              <div className="flex items-center gap-2 min-w-0 overflow-hidden">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#00A3FF] animate-ping shrink-0" />
+                <span className="text-[8px] sm:text-[9px] font-mono text-[#00A3FF] tracking-widest uppercase font-bold truncate">
                   PRIME_COMMANDER // {script.title}
                 </span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <button
                   onClick={() => {
                     playClick();
@@ -310,8 +311,8 @@ export const RobotCommanderGuide: React.FC<RobotCommanderGuideProps> = ({ curren
         >
           <div className="absolute inset-0 bg-[#00A3FF]/20 group-hover:bg-[#cc0000]/30 blur-md transition-colors" />
 
-          <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-gray-900 border-2 border-[#00A3FF] group-hover:border-[#cc0000] p-1 clip-octagon shadow-[0_0_20px_rgba(0,163,255,0.4)] transition-all duration-300 flex items-center justify-center">
-            <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-[#cc0000]" />
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gray-900 border-2 border-[#00A3FF] group-hover:border-[#cc0000] p-1 clip-octagon shadow-[0_0_20px_rgba(0,163,255,0.4)] transition-all duration-300 flex items-center justify-center">
+            <div className="absolute bottom-0 left-0 w-2 h-2 bg-[#cc0000]" />
 
             {renderCharacter()}
 
@@ -320,7 +321,7 @@ export const RobotCommanderGuide: React.FC<RobotCommanderGuideProps> = ({ curren
 
           {isMinimized && (
             <motion.div
-              className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#cc0000] flex items-center justify-center text-[9px] font-bold text-white border border-black shadow-[0_0_10px_#cc0000]"
+              className="absolute top-0 right-0 w-4 h-4 rounded-full bg-[#cc0000] flex items-center justify-center text-[9px] font-bold text-white border border-black shadow-[0_0_10px_#cc0000]"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ repeat: Infinity, repeatType: 'reverse', duration: 1 }}

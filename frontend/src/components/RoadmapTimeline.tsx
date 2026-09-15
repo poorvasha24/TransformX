@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'motion/react';
 import { Calendar, Clock, Flame } from 'lucide-react';
 import { ROADMAP_MILESTONES } from '../data/eventData';
@@ -17,7 +17,7 @@ const CheckpointNode = ({ isFinal, progress, activationThreshold }: { isFinal?: 
       style={{ scale, opacity }}
       animate={{ y: [-5, 5, -5] }}
       transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-      className="absolute left-1/2 -translate-x-1/2 -translate-y-full w-20 h-24 z-10 flex items-center justify-center pointer-events-none"
+      className="absolute left-1/2 -translate-x-1/2 -translate-y-full w-10 h-12 sm:w-14 sm:h-18 lg:w-16 lg:h-20 z-10 flex items-center justify-center pointer-events-none"
     >
       <svg viewBox="0 0 100 120" className="w-full h-full drop-shadow-[0_0_15px_rgba(0,163,255,0.6)]">
         <defs>
@@ -51,15 +51,15 @@ const CheckpointNode = ({ isFinal, progress, activationThreshold }: { isFinal?: 
 
 const RoadmapTitle = () => {
   return (
-    <div className="relative w-full max-w-4xl z-50 flex flex-col items-center pointer-events-none mx-auto">
+    <div className="relative w-full max-w-4xl z-50 flex flex-col items-center pointer-events-none mx-auto px-4">
       {/* Small Cybertronian Interface Lines */}
-      <div className="flex items-center gap-4 mb-4">
+      <div className="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-3">
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-16 h-px bg-[#00A3FF] origin-right"
+          className="w-10 sm:w-16 h-px bg-[#00A3FF] origin-right"
         />
         <div className="w-1 h-1 bg-[#cc0000] rounded-full animate-pulse" />
         <motion.div
@@ -67,7 +67,7 @@ const RoadmapTitle = () => {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-16 h-px bg-[#00A3FF] origin-left"
+          className="w-10 sm:w-16 h-px bg-[#00A3FF] origin-left"
         />
       </div>
 
@@ -77,7 +77,7 @@ const RoadmapTitle = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="font-mono text-xs text-[#00A3FF] tracking-[0.3em] mb-4 text-center"
+        className="font-mono text-[10px] sm:text-xs text-[#00A3FF] tracking-[0.18em] sm:tracking-[0.3em] mb-3 text-center px-2"
       >
         TRANSMISSION RECEIVED // TRACK THE PATH TO QUANTUM ARENA
       </motion.p>
@@ -98,7 +98,7 @@ const RoadmapTitle = () => {
           whileInView={{ opacity: 1, clipPath: "inset(0 0% 0 0)" }}
           viewport={{ once: true }}
           transition={{ delay: 0.8, duration: 1, ease: "easeInOut" }}
-          className="font-orbitron font-bold text-4xl md:text-5xl text-white text-center tracking-widest relative"
+          className="font-orbitron font-bold text-2xl sm:text-4xl md:text-5xl text-white text-center tracking-wider sm:tracking-widest relative"
         >
           PRIME <span className="text-gray-300">MISSION</span> PROTOCOL
         </motion.h2>
@@ -119,7 +119,7 @@ const RoadmapTitle = () => {
         whileInView={{ scaleX: 1, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 1.8, duration: 0.6 }}
-        className="w-32 h-1 bg-gradient-to-r from-transparent via-[#cc0000] to-transparent mt-2"
+        className="w-24 sm:w-32 h-1 bg-gradient-to-r from-transparent via-[#cc0000] to-transparent mt-2"
       />
     </div>
   );
@@ -128,6 +128,14 @@ const RoadmapTitle = () => {
 export const RoadmapTimeline: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
   const trackContainerRef = useRef<HTMLDivElement>(null);
+  const [windowWidth, setWindowWidth] = useState(() => typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -140,47 +148,44 @@ export const RoadmapTimeline: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Update activeIndex based on the glowing line progress.
-  // There are 5 segments, so checkpoints are exactly at p = 0, 0.2, 0.4, 0.6, 0.8, 1.0.
   useMotionValueEvent(smoothProgress, "change", (latest) => {
-    // Checkpoints are at 0, 0.2, 0.4, 0.6, 0.8, 1.0.
-    // Brighten a little bit BEFORE the robot arrives (when latest is within 0.1 of the checkpoint)
-    const index = Math.min(5, Math.floor((latest + 0.05) / 0.2));
+    const index = Math.min(3, Math.floor((latest + 0.05) / 0.25));
     if (index !== activeIndex) {
       setActiveIndex(index);
     }
   });
 
   // Map 4 milestones to fixed percentage heights (y-axis of the map).
-  // Total 3 segments, so gaps are 30%.
   const checkpointPositions = [2.5, 32.5, 62.5, 92.5];
+  const containerHeight = windowWidth < 640 ? '250vh' : windowWidth < 1024 ? '340vh' : '420vh';
 
   return (
-    <div id="roadmap" className="flex flex-col w-full bg-[#05070a] scroll-mt-24 pt-12">
-      {/* Title Section placed in standard document flow to prevent overlap */}
-      <section className="bg-[#05070a] pt-12 pb-48 flex justify-center border-t border-[#1e293b]">
+    <div id="roadmap" className="flex flex-col w-full bg-[#05070a] scroll-mt-24 pt-4 sm:pt-8 overflow-x-hidden">
+      {/* Title Section placed in standard document flow with compact bottom spacing */}
+      <section className="bg-[#05070a] pt-4 sm:pt-8 pb-4 sm:pb-8 lg:pb-10 flex justify-center border-t border-[#1e293b]">
         <RoadmapTitle />
       </section>
 
-      {/* 450vh Scrollable Map Container - Ensures all checkpoints fit comfortably while being shorter */}
+      {/* Responsive Scrollable Map Container with Top Headroom for the Truck */}
       <section
         ref={containerRef}
-        style={{ height: '450vh' }}
-        className="relative w-full bg-[#05070a] border-b border-[#1e293b] pb-32"
+        style={{ height: containerHeight }}
+        className="relative w-full max-w-full bg-[#05070a] border-b border-[#1e293b] pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-24 lg:pb-32 overflow-hidden"
       >
 
-        {/* Background Environment Layers (Fixed while scrolling through the map) */}
-        <div className="sticky top-0 left-0 w-full h-screen pointer-events-none z-0">
+        {/* Background Environment Layers (Strictly contained within viewport) */}
+        <div className="sticky top-0 left-0 w-full h-screen pointer-events-none z-0 overflow-hidden">
           <div className="absolute inset-0 bg-sophisticated-radial opacity-20" />
-          <div className="absolute top-1/4 -left-48 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-red-950/15 rounded-full blur-3xl" />
+          <div className="absolute top-1/4 left-0 w-80 sm:w-96 h-80 sm:h-96 bg-blue-900/15 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-0 w-80 sm:w-96 h-80 sm:h-96 bg-red-950/20 rounded-full blur-3xl" />
           <div className="absolute inset-0 bg-cyber-grid opacity-10" />
         </div>
 
         {/* CONTINUOUS SVG PATH (The Track) */}
-        {/* We use a very tall SVG that aligns perfectly with the container's height */}
+        {/* Scaled responsively and positioned with generous headroom so truck is fully visible */}
         <div
           ref={trackContainerRef}
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] max-w-[800px] h-full pointer-events-none z-0"
+          className="absolute top-16 sm:top-20 lg:top-28 left-1/2 -translate-x-1/2 w-[min(90vw,340px)] sm:w-[min(85vw,420px)] md:w-[480px] lg:w-[clamp(520px,56vw,760px)] h-full pointer-events-none z-0"
         >
 
           {/* THE ABSOLUTE POSITIONED ROBOT (Traces the path and scrolls down) */}
@@ -281,51 +286,59 @@ export const RoadmapTimeline: React.FC = () => {
         </div>
 
         {/* CHECKPOINTS AND MISSION CARDS */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full pointer-events-none z-10">
+        {/* Centered responsively across all viewports, keeping desktop alternating layout */}
+        <div className="absolute top-16 sm:top-20 lg:top-28 left-1/2 -translate-x-1/2 w-full max-w-[min(92vw,360px)] sm:max-w-[min(88vw,460px)] md:max-w-2xl lg:max-w-5xl h-full pointer-events-none z-10">
           {ROADMAP_MILESTONES.map((milestone, idx) => {
             const isEven = idx % 2 === 0;
             const topPercent = checkpointPositions[idx];
-            // We convert top percentage to a rough scroll threshold (0 to 1)
-            const activationThreshold = (topPercent / 100) - 0.15; // Trigger entry fade-in slightly before reaching it
-
-            // Determine active state based on activeIndex
+            const activationThreshold = (topPercent / 100) - 0.15;
             const state = idx > activeIndex ? 'INACTIVE' : idx === activeIndex ? 'ACTIVE' : 'COMPLETED';
 
             return (
               <div key={milestone.phaseId} className="absolute w-full flex items-center justify-center pointer-events-auto" style={{ top: `${topPercent}%` }}>
-                {/* The Node on the Path */}
-                <CheckpointNode isFinal={milestone.isFinal} progress={scrollYProgress} activationThreshold={activationThreshold} />
+                {/* The Node on the Path - Aligned with road center */}
+                <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 pointer-events-none">
+                  <CheckpointNode isFinal={milestone.isFinal} progress={scrollYProgress} activationThreshold={activationThreshold} />
+                </div>
 
                 {/* Mission Card connected to the node */}
-                <div className={`absolute top-1/2 -translate-y-1/2 mt-20 md:mt-0 ${milestone.isFinal ? 'md:left-[55%]' : isEven ? 'md:left-[55%]' : 'md:right-[55%]'} left-1/2 -translate-x-1/2 md:translate-x-0 w-[85vw] md:w-[40vw] max-w-[320px] md:max-w-[500px] z-50`}>
+                <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-7 sm:translate-y-8 lg:translate-y-[-50%] ${
+                  (milestone.isFinal || isEven)
+                    ? 'lg:left-[calc(50%+44px)] lg:right-auto lg:translate-x-0'
+                    : 'lg:right-[calc(50%+44px)] lg:left-auto lg:translate-x-0'
+                } w-[calc(100vw-2.5rem)] max-w-[320px] xs:max-w-[340px] sm:max-w-[380px] lg:w-[390px] lg:max-w-[400px] z-50`}>
                   <motion.div
-                    initial={{ opacity: 0, x: (milestone.isFinal || isEven) ? 50 : -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{
+                      opacity: 0,
+                      x: windowWidth >= 1024 ? ((milestone.isFinal || isEven) ? 25 : -25) : 0,
+                      y: windowWidth < 1024 ? 15 : 0
+                    }}
+                    whileInView={{ opacity: 1, x: 0, y: 0 }}
                     viewport={{ once: true, margin: "-10%" }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
                     onMouseEnter={() => playHover()}
                     onClick={() => playRoadmapActivate()}
-                    className={`backdrop-blur-xl border-2 cursor-pointer p-6 clip-chamfer transition-all duration-700 group hover:-translate-y-1 ${state === 'INACTIVE'
+                    className={`backdrop-blur-xl border-2 cursor-pointer p-3 sm:p-3.5 lg:p-4.5 clip-chamfer transition-all duration-700 group hover:-translate-y-1 ${state === 'INACTIVE'
                         ? 'bg-[#0a1128]/60 border-[#1e293b] shadow-none opacity-90'
                         : state === 'ACTIVE'
                           ? milestone.isFinal
-                            ? 'bg-gradient-to-br from-red-950/90 to-[#0a0202] border-red-500 shadow-[0_0_35px_rgba(239,68,68,0.6)] scale-105'
-                            : 'bg-gradient-to-br from-[#0a1128]/90 to-[#05070a] border-[#00A3FF] shadow-[0_0_35px_rgba(0,163,255,0.5)] scale-105'
+                            ? 'bg-gradient-to-br from-red-950/90 to-[#0a0202] border-red-500 shadow-[0_0_35px_rgba(239,68,68,0.6)] scale-[1.02] lg:scale-105'
+                            : 'bg-gradient-to-br from-[#0a1128]/90 to-[#05070a] border-[#00A3FF] shadow-[0_0_35px_rgba(0,163,255,0.5)] scale-[1.02] lg:scale-105'
                           : // COMPLETED
                           milestone.isFinal
                             ? 'bg-red-950/60 border-red-800 shadow-[0_0_15px_rgba(239,68,68,0.2)]'
                             : 'bg-[#0a1128]/70 border-[#00A3FF]/40 shadow-[0_0_15px_rgba(0,163,255,0.2)]'
                       }`}
                   >
-                    <div className="flex items-center gap-2 mb-4 border-b border-gray-800 pb-3">
-                      <span className={`font-mono text-xs font-bold px-2.5 py-0.5 clip-banner transition-colors duration-500 ${state === 'ACTIVE'
+                    <div className="flex items-center gap-2 mb-1.5 sm:mb-2 border-b border-gray-800 pb-1.5 sm:pb-2">
+                      <span className={`font-mono text-[9px] sm:text-xs font-bold px-2 sm:px-2.5 py-0.5 clip-banner transition-colors duration-500 ${state === 'ACTIVE'
                           ? milestone.isFinal ? 'bg-[#cc0000] text-white shadow-[0_0_10px_#cc0000]' : 'bg-[#00A3FF] text-[#05070a] shadow-[0_0_10px_#00A3FF]'
                           : 'bg-gray-900 text-gray-500 border border-gray-800'
                         }`}>
                         {milestone.phaseCode}
                       </span>
                       {milestone.status && (
-                        <span className={`font-mono text-[9px] px-2 py-0.5 border transition-colors duration-500 ${state === 'ACTIVE'
+                        <span className={`font-mono text-[7.5px] sm:text-[9px] px-1.5 sm:px-2 py-0.5 border transition-colors duration-500 ${state === 'ACTIVE'
                             ? 'text-amber-400 bg-amber-950/40 border-amber-500/50'
                             : 'text-gray-600 bg-gray-900/40 border-gray-800'
                           }`}>
@@ -334,48 +347,61 @@ export const RoadmapTimeline: React.FC = () => {
                       )}
                     </div>
 
-                    <h3 className={`font-orbitron font-bold text-base md:text-xl mb-2 transition-colors duration-500 ${state === 'ACTIVE'
+                    <h3 className={`font-orbitron font-bold text-xs sm:text-sm lg:text-base mb-1 sm:mb-1.5 break-words transition-colors duration-500 ${state === 'ACTIVE'
                         ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]'
                         : state === 'COMPLETED' ? 'text-gray-300' : 'text-gray-600'
                       }`}>
                       {milestone.title}
                     </h3>
-                    <p className={`font-mono text-xs sm:text-sm mb-4 leading-relaxed transition-colors duration-500 ${state === 'ACTIVE' ? 'text-blue-100' : state === 'COMPLETED' ? 'text-gray-400' : 'text-gray-600'
+                    <p className={`font-mono text-[10.5px] sm:text-[11.5px] lg:text-xs mb-2 sm:mb-2.5 leading-relaxed transition-colors duration-500 ${state === 'ACTIVE' ? 'text-blue-100' : state === 'COMPLETED' ? 'text-gray-400' : 'text-gray-600'
                       }`}>
                       {milestone.description}
                     </p>
 
-                    <div className={`flex flex-wrap items-center gap-4 border-t pt-4 transition-colors duration-500 ${state === 'ACTIVE' ? 'border-[#3b82f6]/40' : 'border-gray-800'
+                    <div className={`flex flex-wrap items-center gap-1.5 sm:gap-2.5 border-t pt-2 sm:pt-2 transition-colors duration-500 ${state === 'ACTIVE' ? 'border-[#3b82f6]/40' : 'border-gray-800'
                       }`}>
-                      <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm border font-mono text-xs transition-all duration-500 ${state === 'ACTIVE'
+                      <div className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-sm border font-mono text-[8.5px] sm:text-[9.5px] transition-all duration-500 ${state === 'ACTIVE'
                           ? milestone.isFinal ? 'bg-red-950/50 border-red-500/50 shadow-[0_0_10px_rgba(239,68,68,0.2)] text-red-200' : 'bg-[#0a1128]/80 border-[#00A3FF]/50 shadow-[0_0_10px_rgba(0,163,255,0.2)] text-[#e0f2fe]'
                           : 'bg-gray-900/50 border-gray-800 text-gray-500'
                         }`}>
-                        <Calendar className={`w-3.5 h-3.5 ${state === 'ACTIVE' ? (milestone.isFinal ? 'text-red-400' : 'text-[#00A3FF]') : 'text-gray-600'}`} />
+                        <Calendar className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${state === 'ACTIVE' ? (milestone.isFinal ? 'text-red-400' : 'text-[#00A3FF]') : 'text-gray-600'}`} />
                         <span>{milestone.date}</span>
                       </div>
                       {milestone.time && (
-                        <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm border font-mono text-xs transition-all duration-500 ${state === 'ACTIVE'
+                        <div className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-sm border font-mono text-[8.5px] sm:text-[9.5px] transition-all duration-500 ${state === 'ACTIVE'
                             ? 'bg-[#0a1128]/80 border-amber-500/50 shadow-[0_0_10px_rgba(245,158,11,0.2)] text-amber-100'
                             : 'bg-gray-900/50 border-gray-800 text-gray-500'
                           }`}>
-                          <Clock className={`w-3.5 h-3.5 ${state === 'ACTIVE' ? 'text-amber-400' : 'text-gray-600'}`} />
+                          <Clock className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${state === 'ACTIVE' ? 'text-amber-400' : 'text-gray-600'}`} />
                           <span>{milestone.time}</span>
                         </div>
                       )}
                     </div>
                   </motion.div>
 
-                  {/* Mechanical Connector Line from Card to Node (Desktop Only) */}
+                  {/* Mechanical Connector Line from Card to Node */}
+                  {/* Mobile / Tablet: vertical line connecting node to card */}
+                  <motion.div
+                    initial={{ scaleY: 0, opacity: 0 }}
+                    whileInView={{ scaleY: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: "-10%" }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    style={{
+                      transformOrigin: 'top'
+                    }}
+                    className={`lg:hidden absolute -top-5 sm:-top-6 left-1/2 -translate-x-1/2 w-0.5 h-5 sm:h-6 transition-colors duration-500 ${state === 'ACTIVE' ? (milestone.isFinal ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 'bg-[#00A3FF] shadow-[0_0_8px_#00A3FF]') : 'bg-gray-700'
+                      }`}
+                  />
+                  {/* Desktop: connects horizontally to center node */}
                   <motion.div
                     initial={{ scaleX: 0, opacity: 0 }}
                     whileInView={{ scaleX: 1, opacity: 1 }}
                     viewport={{ once: true, margin: "-10%" }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
                     style={{
                       transformOrigin: (milestone.isFinal || isEven) ? 'left' : 'right'
                     }}
-                    className={`hidden md:block absolute top-1/2 -translate-y-1/2 ${(milestone.isFinal || isEven) ? 'right-[100%] w-12' : 'left-[100%] w-12'} h-0.5 transition-colors duration-500 ${state === 'ACTIVE' ? (milestone.isFinal ? 'bg-red-500' : 'bg-[#00A3FF]') : 'bg-gray-700'
+                    className={`hidden lg:block absolute top-1/2 -translate-y-1/2 ${(milestone.isFinal || isEven) ? 'right-[100%] w-[44px]' : 'left-[100%] w-[44px]'} h-0.5 transition-colors duration-500 ${state === 'ACTIVE' ? (milestone.isFinal ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 'bg-[#00A3FF] shadow-[0_0_8px_#00A3FF]') : 'bg-gray-700'
                       }`}
                   />
                 </div>
