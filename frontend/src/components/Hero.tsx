@@ -9,7 +9,8 @@ import {
   Cpu,
   ChevronDown,
   Terminal,
-  Activity
+  Activity,
+  FileText
 } from 'lucide-react';
 import { playClick, playHover, playRegisterClick } from '../utils/audio';
 import { CountdownTimer } from './CountdownTimer';
@@ -211,6 +212,46 @@ export const Hero: React.FC<HeroProps> = ({
           Architect real-world solutions across 7 innovation domains.
         </motion.p>
 
+        {/* OPTIMUS PRIME THEMED EXCLUSIVITY NOTICE */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-6 w-full max-w-3xl mx-auto border border-[#00A3FF]/40 bg-gradient-to-r from-[#00A3FF]/10 via-[#0a1526]/80 to-[#cc0000]/10 backdrop-blur-sm p-3 sm:p-4 relative overflow-hidden"
+        >
+          {/* Decorative corners */}
+          <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#00A3FF]" />
+          <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#cc0000]" />
+          <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#00A3FF]" />
+          <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#cc0000]" />
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-[#00A3FF] flex-shrink-0 animate-pulse hidden sm:block" />
+            
+            <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-3 sm:gap-y-4 font-mono text-[10px] sm:text-sm font-bold tracking-[0.1em] sm:tracking-[0.15em] text-slate-300 uppercase text-center w-full">
+              <div className="text-[#00A3FF] font-black w-full sm:w-auto mb-1 sm:mb-0">
+                AUTOBOTS, HEED THIS TRANSMISSION:
+              </div>
+              
+              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-3 w-full sm:w-auto">
+                <span>THIS DIRECTIVE IS EXCLUSIVELY FOR</span>
+                <span className="text-white font-black text-[11px] sm:text-base bg-[#00A3FF]/20 px-3 py-1 rounded shadow-[0_0_12px_rgba(0,163,255,0.6)] border border-[#00A3FF]/50 whitespace-nowrap">
+                  CODE CLUB MEMBERS
+                </span>
+                <span>AND</span>
+                <span className="text-white font-black text-[11px] sm:text-base bg-[#cc0000]/20 px-3 py-1 rounded shadow-[0_0_12px_rgba(204,0,0,0.6)] border border-[#cc0000]/50 whitespace-nowrap">
+                  SKILL RACK TOPPERS
+                </span>
+                <span className="hidden sm:inline">.</span>
+              </div>
+              
+              <div className="text-[#cc0000] font-black w-full sm:w-auto mt-2 sm:mt-0">
+                TRANSFORM AND ROLL OUT!
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         {/* FUTURISTIC COUNTDOWN TIMER COMPONENT */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -271,6 +312,51 @@ export const Hero: React.FC<HeroProps> = ({
             <Shield className="w-4 h-4 text-slate-500" />
             <span>TIMELINE</span>
           </button>
+        </motion.div>
+
+        {/* PRESENTATION TEMPLATE LINK */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.65 }}
+          className="mt-8 sm:mt-10 w-full flex justify-center px-4 relative"
+        >
+          <div className="relative inline-block w-full sm:w-auto">
+            {/* Cute Floating Sparkle - Left */}
+            <motion.div 
+              animate={{ y: [-4, 4, -4], rotate: [-10, 10, -10] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 text-[#00A3FF] flex items-center justify-center pointer-events-none z-20"
+            >
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-[#00A3FF] drop-shadow-[0_0_8px_rgba(0,163,255,0.8)]" />
+            </motion.div>
+
+            <a 
+              href="https://docs.google.com/presentation/d/1wdJxmOeJkv1fWVWBwkcgex1tMPiyJvs9fsD4-gq2H5I/edit?slide=id.p1#slide=id.p1" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center justify-center gap-3 px-6 sm:px-10 py-4 bg-[#0a1526]/90 backdrop-blur-sm border border-[#00A3FF]/40 hover:border-[#00A3FF] hover:bg-[#00A3FF]/15 text-slate-300 hover:text-white font-mono text-xs sm:text-sm font-bold tracking-[0.1em] transition-all overflow-hidden shadow-[0_0_20px_rgba(0,163,255,0.15)] hover:shadow-[0_0_30px_rgba(0,163,255,0.35)] w-full sm:w-auto max-w-2xl rounded-sm"
+            >
+              {/* Cyberpunk corner accents */}
+              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#00A3FF]" />
+              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#00A3FF]" />
+              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#00A3FF]" />
+              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#00A3FF]" />
+              
+              <FileText className="w-5 h-5 text-[#00A3FF] group-hover:scale-110 transition-transform flex-shrink-0" />
+              <span className="text-center">DOWNLOAD OFFICIAL PRESENTATION TEMPLATE</span>
+              <ArrowRight className="w-4 h-4 text-[#00A3FF] group-hover:translate-x-2 group-hover:text-white transition-all flex-shrink-0" />
+            </a>
+
+            {/* Cute Floating Sparkle - Right */}
+            <motion.div 
+              animate={{ y: [4, -4, 4], rotate: [10, -10, 10] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 text-[#00A3FF] flex items-center justify-center pointer-events-none z-20"
+            >
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-[#00A3FF] drop-shadow-[0_0_8px_rgba(0,163,255,0.8)]" />
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 

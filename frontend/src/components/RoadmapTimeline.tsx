@@ -170,7 +170,7 @@ export const RoadmapTimeline: React.FC = () => {
       <section
         ref={containerRef}
         style={{ height: containerHeight }}
-        className="relative w-full max-w-full bg-[#05070a] border-b border-[#1e293b] pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-24 lg:pb-32"
+        className="relative w-full max-w-full bg-[#05070a] pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-24 lg:pb-32"
       >
 
         {/* Background Environment Layers (Strictly contained within viewport) */}
@@ -277,10 +277,6 @@ export const RoadmapTimeline: React.FC = () => {
               <circle cx="500" cy="5550" r="40" fill="#05070a" stroke="#ff4500" strokeWidth="8" filter="url(#pathEnergyBlur)" />
               <circle cx="500" cy="5550" r="20" fill="#cc0000" />
               <circle cx="500" cy="5550" r="10" fill="#fff" filter="url(#pathEnergyBlur)" />
-
-              {/* Energetic Rings (Bottom half only, moved forward to prevent badge overlap) */}
-              <line x1="380" y1="5850" x2="620" y2="5850" stroke="#00A3FF" strokeWidth="4" opacity="0.4" strokeDasharray="20 10" />
-              <line x1="300" y1="5850" x2="700" y2="5850" stroke="#cc0000" strokeWidth="2" opacity="0.2" strokeDasharray="30 15" />
             </motion.g>
           </svg>
         </div>
