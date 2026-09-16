@@ -27,11 +27,11 @@ export const ThemesSection: React.FC = () => {
     // If the scroll is mostly horizontal, capture it to move the carousel
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
       let newX = dragX.get() - e.deltaX;
-      
+
       // Expand limits massively so the user can scroll continuously
       if (newX < -15000) newX = -15000;
       if (newX > 15000) newX = 15000;
-      
+
       dragX.set(newX);
     }
   };
@@ -92,9 +92,9 @@ export const ThemesSection: React.FC = () => {
         </div>
 
         {/* 7 INTERACTIVE MECHANICAL MODULES IN DYNAMIC HORIZONTAL CAROUSEL */}
-        <div 
-          className="relative overflow-hidden pause-marquee" 
-          onMouseEnter={() => setIsHovered(true)} 
+        <div
+          className="relative overflow-hidden pause-marquee"
+          onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onPointerEnter={() => setIsHovered(true)}
           onPointerLeave={() => setIsHovered(false)}
@@ -103,7 +103,7 @@ export const ThemesSection: React.FC = () => {
           onTouchCancel={() => setIsHovered(false)}
           onWheel={handleWheel}
         >
-          
+
           {/* Draggable Parent Wrapper */}
           <motion.div
             drag="x"
@@ -115,106 +115,102 @@ export const ThemesSection: React.FC = () => {
             className="cursor-grab active:cursor-grabbing touch-pan-y"
           >
             {/* Continuous Moving Carousel */}
-            <motion.div 
+            <motion.div
               style={{ animationPlayState: (isHovered || selectedThemeId) ? 'paused' : undefined }}
               className={`flex gap-4 sm:gap-6 min-w-max px-4 py-6 sm:py-8 pointer-events-auto animate-marquee hover:pause-animation ${(isHovered || selectedThemeId) ? 'is-paused' : ''}`}
             >
               {duplicatedThemes.map((theme, index) => {
-            // Give specific visual character to different slots
-            const isRedAccent = theme.accentColor === 'red';
-            const isAmberAccent = theme.accentColor === 'amber';
-            
-            // Generate a truly unique key since we are duplicating the array
-            const uniqueKey = `${theme.id}-${index}`;
+                // Give specific visual character to different slots
+                const isRedAccent = theme.accentColor === 'red';
+                const isAmberAccent = theme.accentColor === 'amber';
 
-            return (
-              <React.Fragment key={uniqueKey}>
-                {index % 7 === 0 && (
-                  <div className="flex flex-col items-center justify-center mx-2 gap-2 opacity-60 flex-shrink-0 pointer-events-none">
-                    <div className="w-[2px] h-24 bg-gradient-to-b from-transparent to-[#00A3FF]" />
-                    <div className="text-[10px] font-mono text-[#00A3FF] -rotate-90 my-12 tracking-[0.3em] whitespace-nowrap">
-                      START SEQUENCE
+                // Generate a truly unique key since we are duplicating the array
+                const uniqueKey = `${theme.id}-${index}`;
+
+                return (
+                  <React.Fragment key={uniqueKey}>
+                    {index % 7 === 0 && (
+                      <div className="flex flex-col items-center justify-center mx-2 gap-2 opacity-60 flex-shrink-0 pointer-events-none">
+                        <div className="w-[2px] h-24 bg-gradient-to-b from-transparent to-[#00A3FF]" />
+                        <div className="text-[10px] font-mono text-[#00A3FF] -rotate-90 my-12 tracking-[0.3em] whitespace-nowrap">
+                          START SEQUENCE
+                        </div>
+                        <div className="w-[2px] h-24 bg-gradient-to-t from-transparent to-[#00A3FF]" />
+                      </div>
+                    )}
+                    <div
+                      onClick={() => handleOpenTheme(theme.id)}
+                      onMouseEnter={() => {
+                        setIsHovered(true);
+                        playHover();
+                        playUiBeep(800 + (index % 7) * 80);
+                      }}
+                      onMouseLeave={() => setIsHovered(false)}
+                      onPointerEnter={() => setIsHovered(true)}
+                      onPointerLeave={() => setIsHovered(false)}
+                      onTouchStart={() => setIsHovered(true)}
+                      onTouchEnd={() => setIsHovered(false)}
+                      onTouchCancel={() => setIsHovered(false)}
+                      className={`carousel-slot group relative bg-[#0a0f1d] border-2 w-[82vw] sm:w-[45vw] md:w-[28vw] max-w-[360px] flex-shrink-0 cursor-pointer ${isRedAccent
+                        ? 'border-[#1e293b] hover:border-[#cc0000] hover:shadow-[0_0_25px_rgba(204,0,0,0.3)]'
+                        : isAmberAccent
+                          ? 'border-[#1e293b] hover:border-amber-400 hover:shadow-[0_0_25px_rgba(245,158,11,0.3)]'
+                          : 'border-[#1e293b] hover:border-[#00A3FF] hover:shadow-[0_0_25px_rgba(0,163,255,0.2)]'
+                        } transition-all duration-300 overflow-hidden clip-chamfer hover:-translate-y-2`}
+                    >
+                      {/* Background Grid Pattern */}
+                      <div className="absolute inset-0 bg-cyber-grid opacity-10 pointer-events-none" />
+
+                      <div className="p-6 relative z-10 h-full flex flex-col">
+                        {/* Top Header */}
+                        <div className="flex items-start justify-between mb-6">
+                          <div className="flex items-center gap-2">
+                            <span className={`px-2 py-0.5 text-[10px] font-mono tracking-widest ${isRedAccent ? 'bg-[#cc0000]/20 text-[#cc0000]' :
+                              isAmberAccent ? 'bg-amber-500/20 text-amber-400' :
+                                'bg-[#00A3FF]/20 text-[#00A3FF]'
+                              }`}>
+                              DOM_0{(index % 7) + 1}
+                            </span>
+                            <span className="text-gray-500 text-[10px] font-mono">{theme.id.slice(0, 8).toUpperCase()}</span>
+                          </div>
+                          <Maximize2 className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
+                        </div>
+
+                        {/* Icon & Title */}
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className={`p-3 rounded-lg bg-[#05070a] border border-[#1e293b] group-hover:scale-110 transition-transform ${isRedAccent ? 'group-hover:border-[#cc0000]' :
+                            isAmberAccent ? 'group-hover:border-amber-400' :
+                              'group-hover:border-[#00A3FF]'
+                            }`}>
+                            {getThemeIcon(theme.iconType)}
+                          </div>
+                          <h3 className="font-orbitron font-bold text-lg sm:text-xl text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all uppercase">
+                            {theme.title}
+                          </h3>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-gray-400 text-sm font-sans flex-grow">
+                          {theme.shortDescription}
+                        </p>
+
+                        {/* Decorative Footer */}
+                        <div className="mt-6 pt-4 border-t border-[#1e293b] flex items-center justify-between">
+                          <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase truncate max-w-[150px]">
+                            {theme.tacticalSpecs.deploymentSector}
+                          </span>
+                          <span className={`text-xs font-bold font-mono uppercase flex items-center gap-1 ${isRedAccent ? 'text-[#cc0000]' :
+                            isAmberAccent ? 'text-amber-400' :
+                              'text-[#00A3FF]'
+                            }`}>
+                            DECRYPT <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="w-[2px] h-24 bg-gradient-to-t from-transparent to-[#00A3FF]" />
-                  </div>
-                )}
-                <div
-                  onClick={() => handleOpenTheme(theme.id)}
-                  onMouseEnter={() => {
-                    setIsHovered(true);
-                    playHover();
-                    playUiBeep(800 + (index % 7) * 80);
-                  }}
-                  onMouseLeave={() => setIsHovered(false)}
-                  onPointerEnter={() => setIsHovered(true)}
-                  onPointerLeave={() => setIsHovered(false)}
-                  onTouchStart={() => setIsHovered(true)}
-                  onTouchEnd={() => setIsHovered(false)}
-                  onTouchCancel={() => setIsHovered(false)}
-                  className={`carousel-slot group relative bg-[#0a0f1d] border-2 w-[82vw] sm:w-[45vw] md:w-[28vw] max-w-[360px] flex-shrink-0 cursor-pointer ${
-                    isRedAccent
-                      ? 'border-[#1e293b] hover:border-[#cc0000] hover:shadow-[0_0_25px_rgba(204,0,0,0.3)]'
-                      : isAmberAccent
-                      ? 'border-[#1e293b] hover:border-amber-400 hover:shadow-[0_0_25px_rgba(245,158,11,0.3)]'
-                      : 'border-[#1e293b] hover:border-[#00A3FF] hover:shadow-[0_0_25px_rgba(0,163,255,0.2)]'
-                  } transition-all duration-300 overflow-hidden clip-chamfer hover:-translate-y-2`}
-                >
-                {/* Background Grid Pattern */}
-                <div className="absolute inset-0 bg-cyber-grid opacity-10 pointer-events-none" />
-
-                <div className="p-6 relative z-10 h-full flex flex-col">
-                  {/* Top Header */}
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-center gap-2">
-                      <span className={`px-2 py-0.5 text-[10px] font-mono tracking-widest ${
-                        isRedAccent ? 'bg-[#cc0000]/20 text-[#cc0000]' : 
-                        isAmberAccent ? 'bg-amber-500/20 text-amber-400' : 
-                        'bg-[#00A3FF]/20 text-[#00A3FF]'
-                      }`}>
-                        DOM_0{(index % 7) + 1}
-                      </span>
-                      <span className="text-gray-500 text-[10px] font-mono">{theme.id.slice(0,8).toUpperCase()}</span>
-                    </div>
-                    <Maximize2 className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
-                  </div>
-
-                  {/* Icon & Title */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`p-3 rounded-lg bg-[#05070a] border border-[#1e293b] group-hover:scale-110 transition-transform ${
-                      isRedAccent ? 'group-hover:border-[#cc0000]' : 
-                      isAmberAccent ? 'group-hover:border-amber-400' : 
-                      'group-hover:border-[#00A3FF]'
-                    }`}>
-                      {getThemeIcon(theme.iconType)}
-                    </div>
-                    <h3 className="font-orbitron font-bold text-lg sm:text-xl text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all uppercase">
-                      {theme.title}
-                    </h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-gray-400 text-sm font-sans flex-grow">
-                    {theme.shortDescription}
-                  </p>
-
-                  {/* Decorative Footer */}
-                  <div className="mt-6 pt-4 border-t border-[#1e293b] flex items-center justify-between">
-                    <span className="text-[10px] font-mono text-gray-500 tracking-widest uppercase truncate max-w-[150px]">
-                      {theme.tacticalSpecs.deploymentSector}
-                    </span>
-                    <span className={`text-xs font-bold font-mono uppercase flex items-center gap-1 ${
-                      isRedAccent ? 'text-[#cc0000]' : 
-                      isAmberAccent ? 'text-amber-400' : 
-                      'text-[#00A3FF]'
-                    }`}>
-                      DECRYPT <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </div>
-                </div>
-              </div>
-              </React.Fragment>
-            );
-          })}
+                  </React.Fragment>
+                );
+              })}
             </motion.div>
           </motion.div>
         </div>

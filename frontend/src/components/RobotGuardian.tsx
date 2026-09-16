@@ -11,19 +11,10 @@ useGLTF.preload('/truck.glb');
 function TruckModel() {
   const { scene } = useGLTF('/truck.glb');
 
-  // Clone the scene so we can safely center it and avoid mutating shared geometry
-  const clonedScene = useMemo(() => {
-    const clone = scene.clone();
-    const box = new THREE.Box3().setFromObject(clone);
-    const center = box.getCenter(new THREE.Vector3());
-    clone.position.sub(center);
-    return clone;
-  }, [scene]);
-
   return (
     <group rotation={[0, 0, 0]}>
       <group position={[0, 0, 0]}>
-        <primitive object={clonedScene} scale={1.38} />
+        <primitive object={scene} scale={2.4} />
       </group>
     </group>
   );
@@ -110,7 +101,7 @@ export const RobotGuardian: React.FC<RobotGuardianProps> = ({ scrollProgress, tr
   // --- PATH TRACING MATH ---
   const topMovement = useTransform(scrollProgress, (p: number) => {
     const yPercent = 2.5 + p * 90;
-    return `${yPercent}%`;
+    return (yPercent / 100) * dimensionsRef.current.height;
   });
 
   const leftMovement = useTransform(scrollProgress, (p: number) => {
@@ -125,7 +116,7 @@ export const RobotGuardian: React.FC<RobotGuardianProps> = ({ scrollProgress, tr
     const factor2 = 3 * t - 3 * t * t;
     const x = factor1 * 500 + factor2 * C_x;
 
-    return `${x / 10}%`;
+    return (x / 1000) * dimensionsRef.current.width;
   });
 
   const rotation = useTransform(scrollProgress, (p: number) => {
@@ -167,8 +158,12 @@ export const RobotGuardian: React.FC<RobotGuardianProps> = ({ scrollProgress, tr
 
   return (
     <motion.div
-      style={{ top: topMovement, left: leftMovement, rotate: rotation, x: "-50%", y: "-50%" }}
-      className="absolute w-24 h-24 sm:w-32 sm:h-32 md:w-44 md:h-44 lg:w-64 lg:h-64 flex items-center justify-center z-[60] pointer-events-none"
+      style={{
+        x: useTransform(leftMovement, val => `calc(${val}px - 50%)`),
+        y: useTransform(topMovement, val => `calc(${val}px - 50%)`),
+        rotate: rotation
+      }}
+      className="absolute top-0 left-0 w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] flex items-center justify-center z-[60] pointer-events-none"
     >
       <div className="relative w-full h-full flex flex-col items-center justify-center pointer-events-none">
         <Canvas
