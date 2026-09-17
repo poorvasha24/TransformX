@@ -7,6 +7,18 @@
 let audioCtx: AudioContext | null = null;
 let isSoundEnabled = false;
 
+if (typeof document !== 'undefined') {
+  document.addEventListener('visibilitychange', () => {
+    if (audioCtx) {
+      if (document.hidden) {
+        audioCtx.suspend();
+      } else if (isSoundEnabled && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+  });
+}
+
 function getAudioContext(): AudioContext | null {
   if (typeof window === 'undefined') return null;
   if (!audioCtx) {

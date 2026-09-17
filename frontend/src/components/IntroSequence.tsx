@@ -163,7 +163,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
                   playsInline
                   muted={isMuted}
                   onEnded={handleVideoEnded}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain sm:object-cover"
                   src="/videos/intro.mp4"
                 />
 

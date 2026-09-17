@@ -8,14 +8,24 @@ import * as THREE from 'three';
 useGLTF.preload('/truck.glb');
 
 // 3D Peterbilt 379 Truck Model (Optimus Prime)
-function TruckModel() {
+function TruckModel({ truckRotation }: { truckRotation: MotionValue<number> }) {
   const { scene } = useGLTF('/truck.glb');
+  const groupRef = useRef<THREE.Group>(null);
+
+  useEffect(() => {
+    return truckRotation.on('change', (angleDeg) => {
+      if (groupRef.current) {
+        // The CSS rotation was previously on the Z axis of the screen.
+        // In our top-down orthographic camera, rotating around Y achieves the same visual rotation.
+        // CSS rotation is clockwise, Three.js Y rotation is counter-clockwise, so we negate it.
+        groupRef.current.rotation.y = THREE.MathUtils.degToRad(-angleDeg);
+      }
+    });
+  }, [truckRotation]);
 
   return (
-    <group rotation={[0, 0, 0]}>
-      <group position={[0, 0, 0]}>
-        <primitive object={scene} scale={2.4} />
-      </group>
+    <group ref={groupRef} rotation={[0, 0, 0]}>
+      <primitive object={scene} scale={2.4} />
     </group>
   );
 }
@@ -161,7 +171,6 @@ export const RobotGuardian: React.FC<RobotGuardianProps> = ({ scrollProgress, tr
       style={{
         x: useTransform(leftMovement, val => `calc(${val}px - 50%)`),
         y: useTransform(topMovement, val => `calc(${val}px - 50%)`),
-        rotate: rotation
       }}
       className="absolute top-0 left-0 w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] flex items-center justify-center z-[60] pointer-events-none"
     >
@@ -177,7 +186,7 @@ export const RobotGuardian: React.FC<RobotGuardianProps> = ({ scrollProgress, tr
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 20, 10]} intensity={1.5} />
           <Suspense fallback={null}>
-            <TruckModel />
+            <TruckModel truckRotation={rotation} />
             <Environment preset="night" />
           </Suspense>
           <CameraController zoom={cameraZoom} />
@@ -185,7 +194,6 @@ export const RobotGuardian: React.FC<RobotGuardianProps> = ({ scrollProgress, tr
 
         {/* Dynamic Status Display */}
         <motion.div
-          style={{ rotate: useTransform(rotation, (r) => -r) }}
           className="absolute -bottom-2 sm:-bottom-2.5 lg:-bottom-3.5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5 sm:gap-1 bg-black/85 border border-[#00A3FF]/50 px-1.5 py-0.5 sm:px-2 sm:py-0.5 lg:px-2.5 rounded-sm backdrop-blur-md whitespace-nowrap pointer-events-none shadow-[0_0_10px_rgba(0,163,255,0.3)]"
         >
           <div className="flex items-center gap-1 sm:gap-1.5">

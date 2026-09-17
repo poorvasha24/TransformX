@@ -13,8 +13,8 @@ interface TimeLeft {
 export const CountdownTimer: React.FC = () => {
   // Target: 25 September 2026, 09:00:00 IST
   const targetDate = new Date('2026-09-25T09:00:00+05:30').getTime();
-  // Round 1 Submission Target: 20 September 2026, 23:59:59 IST
-  const round1TargetDate = new Date('2026-09-20T23:59:59+05:30').getTime();
+  // Round 1 Submission Target: 20 September 2026, 16:00:00 IST
+  const round1TargetDate = new Date('2026-09-20T16:00:00+05:30').getTime();
 
   const calculateTimeLeft = (target: number): TimeLeft => {
     const now = new Date().getTime();
@@ -139,7 +139,7 @@ export const CountdownTimer: React.FC = () => {
         </div>
         
         <div className="mt-2.5 sm:mt-3 flex items-center justify-center text-[8px] sm:text-[9px] font-mono text-slate-500 tracking-widest uppercase text-center">
-          TARGET: 20 SEP 2026 // 23:59 IST
+          TARGET: 20 SEP 2026 // 16:00 IST
         </div>
       </div>
     </div>

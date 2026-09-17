@@ -27,8 +27,8 @@ const generateMembers = (count: number, prefix: string): Member[] => {
 const coreMembers = generateMembers(5, 'Scope Member').map((member, index) => {
   if (index === 0) { return { name: 'Dr. G. Manimala', role: 'Strategist', image: '/images/CODE CLUB (3).png' }; }
   if (index === 1) { return { name: 'Dr. B. Latha', role: 'Captain', image: '/images/CODE CLUB (1).png' }; }
-  if (index === 2) { return { name: 'Dr. L . Kannagi', role: 'Organizer', image: '/images/WhatsApp Image 2026-09-17 at 8.08.37 PM.jpeg' }; }
-  if (index === 3) { return { name: 'Dr. K. Neela', role: 'Propagator', image: '/images/WhatsApp Image 2026-09-17 at 8.07.41 PM.jpeg' }; }
+  if (index === 2) { return { name: 'Ms. L . Kannagi', role: 'Organizer', image: '/images/WhatsApp Image 2026-09-17 at 8.08.37 PM.jpeg' }; }
+  if (index === 3) { return { name: 'Ms. K. Neela', role: 'Propagator', image: '/images/WhatsApp Image 2026-09-17 at 8.07.41 PM.jpeg' }; }
   if (index === 4) { return { name: 'Dr. J. M Nandhini', role: 'Executor', image: '/images/CODE CLUB (4).png' }; }
   return member;
 });
