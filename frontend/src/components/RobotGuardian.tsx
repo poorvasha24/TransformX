@@ -168,7 +168,7 @@ export const RobotGuardian: React.FC<RobotGuardianProps> = ({ scrollProgress, tr
       <div className="relative w-full h-full flex flex-col items-center justify-center pointer-events-none">
         <Canvas
           orthographic
-          frameloop="demand"
+          frameloop="always"
           dpr={[1, 1.5]}
           gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
           camera={{ position: [0, 20, 0], zoom: cameraZoom, near: 0.1, far: 1000, rotation: [-Math.PI / 2, 0, 0] }}

@@ -127,24 +127,15 @@ function scheduler(ctx: AudioContext) {
   bgSequenceTimer = window.setTimeout(() => scheduler(ctx), lookahead);
 }
 
-export function setSoundEnabled(enabled: boolean) {
+export function setSoundEnabled(enabled: boolean, startBgMusic = true) {
   isSoundEnabled = enabled;
   if (enabled) {
     const ctx = getAudioContext();
     if (ctx && ctx.state === 'suspended') {
       ctx.resume();
     }
-    if (ctx && bgSequenceTimer === null) {
-      bgGain = ctx.createGain();
-      bgGain.gain.value = 0; // Start at 0 for fade in
-      bgGain.connect(ctx.destination);
-
-      // Fade in smoothly over 2 seconds
-      bgGain.gain.setTargetAtTime(0.25, ctx.currentTime, 0.5);
-
-      nextNoteTime = ctx.currentTime + 0.1;
-      current16thNote = 0;
-      scheduler(ctx);
+    if (startBgMusic && ctx && bgSequenceTimer === null) {
+      startBackgroundMusic();
     }
   } else {
     if (bgGain) {
@@ -158,6 +149,23 @@ export function setSoundEnabled(enabled: boolean) {
         }
       }, 2000);
     }
+  }
+}
+
+export function startBackgroundMusic() {
+  if (!isSoundEnabled) return;
+  const ctx = getAudioContext();
+  if (ctx && bgSequenceTimer === null) {
+    bgGain = ctx.createGain();
+    bgGain.gain.value = 0; // Start at 0 for fade in
+    bgGain.connect(ctx.destination);
+
+    // Fade in smoothly over 2 seconds
+    bgGain.gain.setTargetAtTime(0.25, ctx.currentTime, 0.5);
+
+    nextNoteTime = ctx.currentTime + 0.1;
+    current16thNote = 0;
+    scheduler(ctx);
   }
 }
 
