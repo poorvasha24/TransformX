@@ -90,7 +90,7 @@ export const EventDetails: React.FC = () => {
               DURATION
             </h3>
             <p className="font-sans text-sm sm:text-base text-gray-300 mt-2 font-medium">
-              8 Hours Non-Stop
+              6 Hours Non-Stop
             </p>
           </motion.div>
 
@@ -123,8 +123,8 @@ export const EventDetails: React.FC = () => {
             </h3>
             <p className="font-sans text-sm sm:text-base text-gray-300 mt-2 font-medium">
               Sri Sairam Engineering College
-              <br/>
-              <span className="text-[#00A3FF]/80">2-3 members per team</span>
+              <br />
+              <span className="text-[#00A3FF]/80">3 members per team</span>
             </p>
           </motion.div>
 
