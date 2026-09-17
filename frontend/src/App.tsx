@@ -25,10 +25,10 @@ const generateMembers = (count: number, prefix: string): Member[] => {
 };
 
 const coreMembers = generateMembers(5, 'Scope Member').map((member, index) => {
-  if (index === 0) { return { name: 'Dr. G. Manimala', role: 'Strategist', image: '/images/CODE CLUB (3).png' }; }
+  if (index === 0) { return { name: 'Dr. S. Vidya', role: 'Strategist', image: '/images/CODE CLUB.png' }; }
   if (index === 1) { return { name: 'Dr. B. Latha', role: 'Captain', image: '/images/CODE CLUB (1).png' }; }
-  if (index === 2) { return { name: 'Dr. L . Kannagi', role: 'Organizer', image: '/images/WhatsApp Image 2026-09-17 at 8.08.37 PM.jpeg' }; }
-  if (index === 3) { return { name: 'Dr. K. Neela', role: 'Propagator', image: '/images/WhatsApp Image 2026-09-17 at 8.07.41 PM.jpeg' }; }
+  if (index === 2) { return { name: 'Dr. M. Nithya', role: 'Organizer', image: '/images/CODE CLUB (2).png' }; }
+  if (index === 3) { return { name: 'Dr. G. Manimala', role: 'Propagator', image: '/images/CODE CLUB (3).png' }; }
   if (index === 4) { return { name: 'Dr. J. M Nandhini', role: 'Executor', image: '/images/CODE CLUB (4).png' }; }
   return member;
 });
@@ -67,7 +67,7 @@ const eventCoordinators = generateMembers(6, 'Event Coordinator').map((member, i
   if (index === 0) { return { name: 'Poorvasha K', role: 'Event Coordinator', image: '/images/poorvasha_new.jpeg' }; }
   if (index === 1) { return { name: 'Dhayaa Shri S', role: 'Event Coordinator', image: '/images/dhayaa_new.jpeg' }; }
   if (index === 2) { return { name: 'Darshana S', role: 'Event Coordinator', image: '/images/dharshana.jpeg' }; }
-  if (index === 3) { return { name: 'Megesh L', role: 'Event Coordinator', image: '/images/WhatsApp Image 2026-09-17 at 7.41.44 PM.jpeg' }; }
+  if (index === 3) { return { name: 'Megesh L', role: 'Event Coordinator', image: '/images/megesg.jpeg' }; }
   if (index === 4) { return { name: 'Praveen Kumar R', role: 'Event Coordinator', image: '/images/praveen.jpeg' }; }
   if (index === 5) { return { name: 'Harsharani R B', role: 'Event Coordinator', image: '/images/harshu.jpeg' }; }
   return member;

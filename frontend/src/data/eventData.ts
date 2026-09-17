@@ -217,7 +217,7 @@ export const ROADMAP_MILESTONES: RoadmapMilestone[] = [
     phaseCode: "PHASE_01",
     title: "UPLINK SEVERED: SUBMISSION DEADLINE",
     description: "Units must submit detailed system blueprints, tech-stack justification, and a clear execution matrix. The uplink for all registrations and submissions will be permanently severed.",
-    date: "20th September 2026",
+    date: "21st September 2026",
     time: "",
     status: "BROADCAST",
     type: "SUBMISSION",

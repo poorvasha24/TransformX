@@ -233,18 +233,16 @@ export const Hero: React.FC<HeroProps> = ({
                 AUTOBOTS, HEED THIS TRANSMISSION:
               </div>
               
-              <div className="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 gap-y-3 w-full sm:w-auto">
-                <span className="text-[10px] sm:text-sm">THIS DIRECTIVE IS EXCLUSIVELY FOR</span>
-                <div className="flex items-center gap-x-1 sm:gap-x-2">
-                  <span className="text-white font-black text-[8px] min-[380px]:text-[10px] sm:text-base bg-[#00A3FF]/20 px-1.5 min-[380px]:px-2 sm:px-3 py-0.5 sm:py-1 rounded shadow-[0_0_12px_rgba(0,163,255,0.6)] border border-[#00A3FF]/50 whitespace-nowrap">
-                    CODE CLUB MEMBERS
-                  </span>
-                  <span className="text-[10px] sm:text-sm">AND</span>
-                  <span className="text-white font-black text-[8px] min-[380px]:text-[10px] sm:text-base bg-[#cc0000]/20 px-1.5 min-[380px]:px-2 sm:px-3 py-0.5 sm:py-1 rounded shadow-[0_0_12px_rgba(204,0,0,0.6)] border border-[#cc0000]/50 whitespace-nowrap">
-                    SKILL RACK TOPPERS
-                  </span>
-                  <span className="hidden sm:inline">.</span>
-                </div>
+              <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-3 w-full sm:w-auto">
+                <span>THIS DIRECTIVE IS EXCLUSIVELY FOR</span>
+                <span className="text-white font-black text-[11px] sm:text-base bg-[#00A3FF]/20 px-3 py-1 rounded shadow-[0_0_12px_rgba(0,163,255,0.6)] border border-[#00A3FF]/50 whitespace-nowrap">
+                  CODE CLUB MEMBERS
+                </span>
+                <span>AND</span>
+                <span className="text-white font-black text-[11px] sm:text-base bg-[#cc0000]/20 px-3 py-1 rounded shadow-[0_0_12px_rgba(204,0,0,0.6)] border border-[#cc0000]/50 whitespace-nowrap">
+                  SKILL RACK TOPPERS
+                </span>
+                <span className="hidden sm:inline">.</span>
               </div>
               
               <div className="text-[#cc0000] font-black w-full sm:w-auto mt-2 sm:mt-0">

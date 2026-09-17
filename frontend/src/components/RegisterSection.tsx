@@ -114,7 +114,7 @@ export const RegisterSection: React.FC = () => {
                 <Users className="w-3.5 h-3.5" />
                 <span>SQUAD SIZE</span>
               </div>
-              <p className="text-xs text-gray-300">3 Operatives per Unit</p>
+              <p className="text-xs text-gray-300">2 to 3 Operatives per Unit</p>
             </div>
 
             <div className="bg-[#05070a] p-3 sm:p-3.5 border border-[#1e293b] clip-chamfer">
@@ -130,7 +130,7 @@ export const RegisterSection: React.FC = () => {
                 <Cpu className="w-3.5 h-3.5" />
                 <span>ELIGIBILITY</span>
               </div>
-              <p className="text-xs text-gray-300">Skillrack Toppers and<br></br> Code Club Members</p>
+              <p className="text-xs text-gray-300">Skillrack Toppers</p>
             </div>
           </div>
         </div>
